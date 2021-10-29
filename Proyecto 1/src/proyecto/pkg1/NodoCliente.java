@@ -13,11 +13,13 @@ public class NodoCliente {
     private NodoCliente siguiente;
     private char direccion;
     private String nombre;
+    private String apellido;
     private int cedula;
     
-    public NodoCliente(char direccion, String nombre, int cedula){
+    public NodoCliente(char direccion, String nombre, String apellido, int cedula){
         this.direccion = direccion;
         this.nombre = nombre;
+        this.apellido = apellido;
         this.cedula = cedula;
         this.siguiente = null;
         
