@@ -106,8 +106,8 @@ public class VentanaNuevoCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        new VentanaCliente().setVisible(true);
-        dispose();
+//        new VentanaCliente().setVisible(true);
+//        dispose();
     }//GEN-LAST:event_cancelarActionPerformed
 
     /**

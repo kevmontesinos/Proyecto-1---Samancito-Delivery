@@ -58,7 +58,28 @@ public class ListaClientes {
         }
         return info;
     }
-
+    
+    public int[] getArrayClientes(){
+        int[] clientes = new int[tamano];
+        NodoCliente aux = primero;
+        for (int i = 0; i < tamano; i++){
+            clientes[i] = aux.getCedula();
+            aux = aux.getSiguiente();
+        }
+        return clientes;
+    }
+    
+    public NodoCliente getNodo(int cedula){
+        NodoCliente aux = primero;
+        for (int i = 0; i < tamano; i++){
+            if (aux.getCedula() == cedula){
+                return aux;
+            }
+            aux = aux.getSiguiente();
+        }
+        return null;
+    }
+    
     public void imprimirLista() {
         String info = "";
         if (esVacio()) {

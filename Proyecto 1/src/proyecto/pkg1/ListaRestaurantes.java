@@ -70,6 +70,39 @@ public class ListaRestaurantes {
         return info;
     }
     
+    public String[] getArrayRest(){
+        String[] restaurantes = new String[tamano];
+        NodoRestaurante aux = primero;
+        for (int i = 0; i < tamano; i++){
+            restaurantes[i] = aux.getNombre();
+            aux = aux.getSiguiente();
+        }
+        return restaurantes;
+    }
+    
+    public String[] buscarRest(String restaurante){
+        NodoRestaurante aux = primero;
+        for (int i = 0; i < tamano; i++){
+            if (aux.getNombre().equals(restaurante)){
+                return aux.getMenu();
+            }
+            aux = aux.getSiguiente();
+        }
+        
+        return null;
+    }
+    
+          
+    public NodoRestaurante getNodo(String restaurante){
+        NodoRestaurante aux = primero;
+        for (int i = 0; i < tamano; i++){
+            if (aux.getNombre().equals(restaurante)){
+                return aux;
+            }
+            aux = aux.getSiguiente();
+        }
+        return null;
+    }
 
     public void imprimirLista() {
         String info = "";

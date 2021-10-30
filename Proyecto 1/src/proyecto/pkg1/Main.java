@@ -7,18 +7,21 @@ import javax.swing.JOptionPane;
 public class Main {
 
     public static void main(String[] args) {
-        ListaRestaurantes listaRestaurantes = new ListaRestaurantes();
-        ListaClientes listaClientes = new ListaClientes();
-        ListaPedidos listaPedidos = new ListaPedidos();
-        ListaRutas listaRutas = new ListaRutas();
+        
         
         VentanaGeneral vg = new VentanaGeneral();
         
         Funciones f = new Funciones();
         
         
+        //Listas listas = f.leerTxtPred();
+         
+//        ListaRestaurantes listaRestaurantes = listas.getListaRestaurantes();
+//        ListaClientes listaClientes = listas.getListaClientes();
+//        ListaPedidos listaPedidos = listas.getListaPedidos();
+//        ListaRutas listaRutas = listas.getListaRutas();
         
-        f.leerTxtPred(listaRestaurantes, listaClientes, listaPedidos, listaRutas);
+        
        // f.leerTxtCargado(listaRestaurantes, listaClientes);
         
 //       listaClientes.agregarFinal('7', "Kevin", "Montesinos", 28416348);

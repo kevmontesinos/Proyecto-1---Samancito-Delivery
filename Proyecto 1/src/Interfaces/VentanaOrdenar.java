@@ -5,20 +5,38 @@
  */
 package Interfaces;
 
+import javax.swing.JOptionPane;
+import proyecto.pkg1.Listas;
+
 /**
  *
  * @author Kevin
  */
 public class VentanaOrdenar extends javax.swing.JFrame {
 
+    Listas listas;
+
     /**
      * Creates new form VentanaOrdenar
+     *
+     * @param listas
      */
-    public VentanaOrdenar() {
+    public VentanaOrdenar(Listas listas) {
         initComponents();
         this.setLocationRelativeTo(null);
-               
-       
+        this.listas = listas;
+        
+        int[] cedulas = listas.getListaClientes().getArrayClientes();
+        
+        for(int i = 0; i < cedulas.length; i++){
+            cedula.addItem(Integer.toString(cedulas[i]));
+        }
+
+        String[] restaurantes = listas.getListaRestaurantes().getArrayRest();
+        for (int i = 0; i < restaurantes.length; i++) {
+            restaurante.addItem(restaurantes[i]);
+        }
+
     }
 
     /**
@@ -35,33 +53,50 @@ public class VentanaOrdenar extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         restaurante = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jSpinner1 = new javax.swing.JSpinner();
-        jButton1 = new javax.swing.JButton();
+        plato = new javax.swing.JComboBox<>();
+        numero = new javax.swing.JSpinner();
+        enviar = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
-        cedula = new javax.swing.JTextField();
+        cedula = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Ingrese su cedula: ");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
+        jLabel1.setText("Ingrese la cedula: ");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, -1));
 
         jLabel2.setText("Seleccione el restaurante: ");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
 
-        jPanel1.add(restaurante, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 80, -1));
+        restaurante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restauranteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(restaurante, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 120, -1));
 
         jLabel3.setText("Seleccione el plato: ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
 
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, -1, -1));
-        jPanel1.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, -1, -1));
+        plato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                platoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(plato, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 120, -1));
 
-        jButton1.setText("Enviar orden");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, -1, -1));
+        numero.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        jPanel1.add(numero, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, 80, -1));
+
+        enviar.setText("Enviar orden");
+        enviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enviarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(enviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, -1, -1));
 
         cancelar.setText("Cancelar");
         cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -69,8 +104,9 @@ public class VentanaOrdenar extends javax.swing.JFrame {
                 cancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
-        jPanel1.add(cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 80, -1));
+        jPanel1.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, -1, -1));
+
+        jPanel1.add(cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 120, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 360));
 
@@ -78,55 +114,88 @@ public class VentanaOrdenar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        new VentanaCliente().setVisible(true);
+        new VentanaCliente(listas).setVisible(true);
         dispose();
     }//GEN-LAST:event_cancelarActionPerformed
+
+    private void restauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restauranteActionPerformed
+
+        String[] menu = listas.getListaRestaurantes().buscarRest(String.valueOf(restaurante.getSelectedItem()));
+        
+        try {
+            plato.removeAllItems();
+            for (int i = 0; i < menu.length; i++) {
+                plato.addItem(menu[i]);
+            }
+        } catch (Exception e) {
+
+        }
+
+
+    }//GEN-LAST:event_restauranteActionPerformed
+
+    private void platoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_platoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_platoActionPerformed
+
+    private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
+        
+        char direccionCliente = listas.getListaClientes().getNodo(Integer.valueOf(String.valueOf(cedula.getSelectedItem()))).getDireccion();
+        char direccionRestaurante = listas.getListaRestaurantes().getNodo(String.valueOf(restaurante.getSelectedItem())).getDireccion();
+        
+        String[] pedido = {numero.getValue().toString() + "-" + plato.getSelectedItem()};
+        
+        listas.getListaPedidos().agregarFinal(direccionCliente, direccionRestaurante, pedido);
+        
+        
+        JOptionPane.showMessageDialog(null, "Su pedido fue agregador correctamente");
+    }//GEN-LAST:event_enviarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaOrdenar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaOrdenar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaOrdenar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaOrdenar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaOrdenar().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(VentanaOrdenar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(VentanaOrdenar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(VentanaOrdenar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(VentanaOrdenar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new VentanaOrdenar().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelar;
-    private javax.swing.JTextField cedula;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cedula;
+    private javax.swing.JButton enviar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner numero;
+    private javax.swing.JComboBox<String> plato;
     private javax.swing.JComboBox<String> restaurante;
     // End of variables declaration//GEN-END:variables
 }

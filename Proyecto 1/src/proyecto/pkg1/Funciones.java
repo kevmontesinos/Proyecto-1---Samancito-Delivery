@@ -18,7 +18,12 @@ import javax.swing.JOptionPane;
  */
 public class Funciones {
 
-    public void leerTxtPred(ListaRestaurantes listaRestaurantes, ListaClientes listaClientes, ListaPedidos listaPedidos, ListaRutas listaRutas) {
+    public Listas leerTxtPred() {
+        ListaRestaurantes listaRestaurantes = new ListaRestaurantes();
+        ListaClientes listaClientes = new ListaClientes();
+        ListaPedidos listaPedidos = new ListaPedidos();
+        ListaRutas listaRutas = new ListaRutas();
+        
         String line;
         String txt = ""; //donde se guardará todo
         String path = "test\\data.txt";
@@ -78,23 +83,6 @@ public class Funciones {
                         }
                     }
 
-//                    boolean rutas = false;
-//                    int posicion = 0;
-//                    for(int i=0; i < txt_split.length; i++){
-//                        if ("Rutas".equals(txt_split[i])){
-//                            rutas = true;
-//                            rutas_array = new String[(txt_split.length - i) - 1];
-//                            i++;
-//                            
-//                        }
-//                        
-//                        if (rutas){
-//                            System.out.println(rutas_array.length);
-//                            rutas_array[posicion] = txt_split[(i)];
-//                            posicion ++;
-//                        }
-//                        
-//                    }
                 }
                 br.close();
                 JOptionPane.showMessageDialog(null, "Lectura exitosa.");
@@ -103,6 +91,8 @@ public class Funciones {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al leer");
         }
+        
+        return new Listas(listaRestaurantes, listaClientes, listaPedidos, listaRutas);
     }
 
     public void leerTxtCargado(ListaRestaurantes listaRestaurantes, ListaClientes listaClientes, ListaPedidos listaPedidos, ListaRutas listaRutas) {
@@ -182,16 +172,16 @@ public class Funciones {
         info += listaClientes.getInformacionLista();
         info += listaPedidos.getInformacionLista();
         info += listaRutas.getInformacionLista();
-        
-        try{
+
+        try {
             PrintWriter pw = new PrintWriter("test\\data.txt");
             pw.print(info);
             pw.close();
             JOptionPane.showMessageDialog(null, "Guardado exitoso");
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al guardar");
         }
-        
+
     }
 
 }
