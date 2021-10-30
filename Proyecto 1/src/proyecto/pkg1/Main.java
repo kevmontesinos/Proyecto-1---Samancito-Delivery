@@ -1,6 +1,7 @@
 
 package proyecto.pkg1;
 
+import Interfaces.VentanaGeneral;
 import javax.swing.JOptionPane;
 
 public class Main {
@@ -11,7 +12,7 @@ public class Main {
         ListaPedidos listaPedidos = new ListaPedidos();
         ListaRutas listaRutas = new ListaRutas();
         
-        
+        VentanaGeneral vg = new VentanaGeneral();
         
         Funciones f = new Funciones();
         
@@ -20,15 +21,15 @@ public class Main {
         f.leerTxtPred(listaRestaurantes, listaClientes, listaPedidos, listaRutas);
        // f.leerTxtCargado(listaRestaurantes, listaClientes);
         
-       listaClientes.agregarFinal('7', "Kevin", "Montesinos", 28416348);
-       String[] menu = {"gsgkskg", "hdjfhajsdfa","njdfajdf"};
-       listaRestaurantes.agregarFinal('F', "Subway", menu);
-       String[] pedido = {"3-Holy Tempeh","1-Holy Chicken Tenders"};
-       listaPedidos.agregarFinal('8', 'Z', pedido);
-       listaRutas.agregarFinal('Z', '5', 22);
+//       listaClientes.agregarFinal('7', "Kevin", "Montesinos", 28416348);
+//       String[] menu = {"gsgkskg", "hdjfhajsdfa","njdfajdf"};
+//       listaRestaurantes.agregarFinal('F', "Subway", menu);
+//       String[] pedido = {"3-Holy Tempeh","1-Holy Chicken Tenders"};
+//       listaPedidos.agregarFinal('8', 'Z', pedido);
+//       listaRutas.agregarFinal('Z', '5', 22);
        
        
-       f.escribirTxt(listaRestaurantes, listaClientes, listaPedidos, listaRutas);
+       //f.escribirTxt(listaRestaurantes, listaClientes, listaPedidos, listaRutas);
        
 
        
