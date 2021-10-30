@@ -44,15 +44,29 @@ public class ListaClientes {
         }
         tamano++;
     }
-    
-            public void imprimirLista() {
+
+    public String getInformacionLista() {
+        String info = "Clientes\n";
+        if (!esVacio()) {
+
+            NodoCliente aux = primero;
+
+            for (int i = 0; i < tamano; i++) {
+                info += aux.getDireccion() + "," + aux.getNombre() + "," + aux.getApellido() + "," + aux.getCedula() + "\n";
+                aux = aux.getSiguiente();
+            }
+        }
+        return info;
+    }
+
+    public void imprimirLista() {
         String info = "";
         if (esVacio()) {
             System.out.println("La lista está vacía");
 
         } else {
             NodoCliente aux = primero;
-            
+
             for (int i = 0; i < tamano; i++) {
                 info += "Direccion: " + aux.getDireccion() + ", " + "Nombre: " + aux.getNombre() + "\n";
                 aux = aux.getSiguiente();
@@ -60,5 +74,5 @@ public class ListaClientes {
         }
         JOptionPane.showMessageDialog(null, info);
     }
- 
+
 }

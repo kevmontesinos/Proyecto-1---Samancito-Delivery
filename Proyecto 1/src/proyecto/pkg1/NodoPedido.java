@@ -13,12 +13,12 @@ public class NodoPedido {
     private NodoPedido siguiente;
     private char direccionCliente;
     private char direccionRestaurante;
-    private String[] pedidos;
+    private String[] pedido;
       
-    public NodoPedido (char direccionCliente, char direccionRestaurante, String[] pedidos){
+    public NodoPedido (char direccionCliente, char direccionRestaurante, String[] pedido){
         this.direccionCliente = direccionCliente;
         this.direccionRestaurante = direccionRestaurante;
-        this.pedidos = pedidos;
+        this.pedido = pedido;
     }
 
     public NodoPedido getSiguiente() {
@@ -45,12 +45,12 @@ public class NodoPedido {
         this.direccionRestaurante = direccionRestaurante;
     }
 
-    public String[] getPedidos() {
-        return pedidos;
+    public String[] getPedido() {
+        return pedido;
     }
 
-    public void setPedidos(String[] pedidos) {
-        this.pedidos = pedidos;
+    public void setPedido(String[] pedido) {
+        this.pedido = pedido;
     }
     
     

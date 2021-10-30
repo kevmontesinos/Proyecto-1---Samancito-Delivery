@@ -8,6 +8,7 @@ package proyecto.pkg1;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.PrintWriter;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -17,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class Funciones {
 
-    public void leerTxtPred(ListaRestaurantes listaRestaurantes, ListaClientes listaClientes, ListaPedidos listaPedidos) {
+    public void leerTxtPred(ListaRestaurantes listaRestaurantes, ListaClientes listaClientes, ListaPedidos listaPedidos, ListaRutas listaRutas) {
         String line;
         String txt = ""; //donde se guardará todo
         String path = "test\\data.txt";
@@ -39,6 +40,7 @@ public class Funciones {
 
                     String[] txt_split = txt.split("\n");
                     int i = 0;
+
                     if ("Restaurantes".equals(txt_split[i])) {
                         i++;
                         while (!txt_split[i].equals("Clientes")) {
@@ -58,12 +60,21 @@ public class Funciones {
                         }
 
                     }
-                    if ("Pedidos".equals(txt_split[i])){
+                    if ("Pedidos".equals(txt_split[i])) {
                         i++;
-                        while (!txt_split[i].equals("Rutas")){
+                        while (!txt_split[i].equals("Rutas")) {
                             String[] pedidos_split = txt_split[i].split(",");
                             listaPedidos.agregarFinal(pedidos_split[0].charAt(0), pedidos_split[1].charAt(0), pedidos_split[2].split("/"));
                             i++;
+                        }
+                    }
+                    if ("Rutas".equals(txt_split[i])) {
+                        i++;
+                        while (i < txt_split.length) {
+                            String[] rutas_split = txt_split[i].split(",");
+                            listaRutas.agregarFinal(rutas_split[0].charAt(0), rutas_split[1].charAt(0), Integer.parseInt(rutas_split[2]));
+                            i++;
+
                         }
                     }
 
@@ -94,11 +105,11 @@ public class Funciones {
         }
     }
 
-    public void leerTxtCargado(ListaRestaurantes listaRestaurantes, ListaClientes listaClientes) {
+    public void leerTxtCargado(ListaRestaurantes listaRestaurantes, ListaClientes listaClientes, ListaPedidos listaPedidos, ListaRutas listaRutas) {
 
         String line;
         String txt = ""; //donde se guardará todo
- 
+
         try {
             JFileChooser fileC = new JFileChooser();
             fileC.showOpenDialog(null);
@@ -137,6 +148,23 @@ public class Funciones {
                         }
 
                     }
+                    if ("Pedidos".equals(txt_split[i])) {
+                        i++;
+                        while (!txt_split[i].equals("Rutas")) {
+                            String[] pedidos_split = txt_split[i].split(",");
+                            listaPedidos.agregarFinal(pedidos_split[0].charAt(0), pedidos_split[1].charAt(0), pedidos_split[2].split("/"));
+                            i++;
+                        }
+                    }
+                    if ("Rutas".equals(txt_split[i])) {
+                        i++;
+                        while (i < txt_split.length) {
+                            String[] rutas_split = txt_split[i].split(",");
+                            listaRutas.agregarFinal(rutas_split[0].charAt(0), rutas_split[1].charAt(0), Integer.parseInt(rutas_split[2]));
+                            i++;
+
+                        }
+                    }
                 }
                 br.close();
                 JOptionPane.showMessageDialog(null, "Lectura exitosa.");
@@ -148,8 +176,22 @@ public class Funciones {
 
     }
 
-    public void escribirTxt() {
-
+    public void escribirTxt(ListaRestaurantes listaRestaurantes, ListaClientes listaClientes, ListaPedidos listaPedidos, ListaRutas listaRutas) {
+        String info = "";
+        info += listaRestaurantes.getInformacionLista();
+        info += listaClientes.getInformacionLista();
+        info += listaPedidos.getInformacionLista();
+        info += listaRutas.getInformacionLista();
+        
+        try{
+            PrintWriter pw = new PrintWriter("test\\data.txt");
+            pw.print(info);
+            pw.close();
+            JOptionPane.showMessageDialog(null, "Guardado exitoso");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error al guardar");
+        }
+        
     }
 
 }

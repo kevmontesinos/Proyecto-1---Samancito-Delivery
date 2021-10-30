@@ -11,13 +11,13 @@ import javax.swing.JOptionPane;
  *
  * @author Kevin
  */
-public class ListaRestaurantes {
+public class ListaRutas {
 
-    NodoRestaurante primero;
-    NodoRestaurante ultimo;
+    NodoRuta primero;
+    NodoRuta ultimo;
     int tamano;
 
-    public ListaRestaurantes() {
+    public ListaRutas() {
         this.primero = null;
         this.ultimo = null;
         this.tamano = 0;
@@ -33,8 +33,8 @@ public class ListaRestaurantes {
         return primero == null;
     }
 
-    public void agregarFinal(char direccion, String nombre, String[] menu) {
-        NodoRestaurante nuevo = new NodoRestaurante(direccion, nombre, menu);
+    public void agregarFinal(char origen, char destino, int peso) {
+        NodoRuta nuevo = new NodoRuta(origen, destino, peso);
         if (esVacio()) {
             primero = nuevo;
             ultimo = nuevo;
@@ -44,32 +44,20 @@ public class ListaRestaurantes {
         }
         tamano++;
     }
-    
-    public String getMenu(NodoRestaurante nodo){
-        String info = "";
-        for (int i = 0; i < nodo.getMenu().length; i++){
-            info += nodo.getMenu()[i];
-            if (i < nodo.getMenu().length - 1)
-                info += "/";
-        }
-        
-        return info;
-    }
 
     public String getInformacionLista() {
-        String info = "Restaurantes\n";
+        String info = "Rutas\n";
         if (!esVacio()) {
 
-            NodoRestaurante aux = primero;
+            NodoRuta aux = primero;
 
             for (int i = 0; i < tamano; i++) {
-                info += aux.getDireccion() + ","  + aux.getNombre() + "," + getMenu(aux) + "\n";
+                info += aux.getOrigen()+ "," + aux.getDestino()+ "," + aux.getPeso()+ "\n";
                 aux = aux.getSiguiente();
             }
         }
         return info;
     }
-    
 
     public void imprimirLista() {
         String info = "";
@@ -77,10 +65,10 @@ public class ListaRestaurantes {
             System.out.println("La lista está vacía");
 
         } else {
-            NodoRestaurante aux = primero;
+            NodoRuta aux = primero;
 
             for (int i = 0; i < tamano; i++) {
-                info += "Direccion: " + aux.getDireccion() + ", " + "Nombre: " + aux.getNombre() + "\n";
+                info += "Origen: " + aux.getOrigen() + ", " + "Destino: " + aux.getDestino() + ", " + "Peso: " + aux.getPeso() + "\n";
                 aux = aux.getSiguiente();
             }
         }

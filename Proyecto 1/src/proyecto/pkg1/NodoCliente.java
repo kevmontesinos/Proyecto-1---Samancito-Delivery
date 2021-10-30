@@ -25,7 +25,7 @@ public class NodoCliente {
         
         
     }
-
+    
     public NodoCliente getSiguiente() {
         return siguiente;
     }
@@ -56,6 +56,14 @@ public class NodoCliente {
 
     public void setCedula(int cedula) {
         this.cedula = cedula;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
     
 }
