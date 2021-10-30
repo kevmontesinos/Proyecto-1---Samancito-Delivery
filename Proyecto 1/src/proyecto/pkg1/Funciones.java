@@ -8,8 +8,8 @@ package proyecto.pkg1;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class Funciones {
 
-    public void leerTxt(ListaRestaurantes listaRestaurantes, ListaClientes listaClientes) {
+    public void leerTxtPred(ListaRestaurantes listaRestaurantes, ListaClientes listaClientes, ListaPedidos listaPedidos) {
         String line;
         String txt = ""; //donde se guardará todo
         String path = "test\\data.txt";
@@ -48,15 +48,23 @@ public class Funciones {
                         }
                     }
                     if ("Clientes".equals(txt_split[i])) {
-         
+
                         i++;
                         while (!txt_split[i].equals("Pedidos")) {
-                            
+
                             String[] clientes_split = txt_split[i].split(",");
                             listaClientes.agregarFinal(clientes_split[0].charAt(0), clientes_split[1], clientes_split[2], Integer.parseInt(clientes_split[3]));
                             i++;
                         }
 
+                    }
+                    if ("Pedidos".equals(txt_split[i])){
+                        i++;
+                        while (!txt_split[i].equals("Rutas")){
+                            String[] pedidos_split = txt_split[i].split(",");
+                            listaPedidos.agregarFinal(pedidos_split[0].charAt(0), pedidos_split[1].charAt(0), pedidos_split[2].split("/"));
+                            i++;
+                        }
                     }
 
 //                    boolean rutas = false;
@@ -84,6 +92,64 @@ public class Funciones {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al leer");
         }
+    }
+
+    public void leerTxtCargado(ListaRestaurantes listaRestaurantes, ListaClientes listaClientes) {
+
+        String line;
+        String txt = ""; //donde se guardará todo
+ 
+        try {
+            JFileChooser fileC = new JFileChooser();
+            fileC.showOpenDialog(null);
+            File file = fileC.getSelectedFile();
+            if (!file.exists()) {
+                file.createNewFile(); //si el archivo no existe, lo crea
+            } else {
+                FileReader fr = new FileReader(file);
+                BufferedReader br = new BufferedReader(fr);
+                while ((line = br.readLine()) != null) {
+                    if (!line.isEmpty()) {
+                        txt += line + "\n";
+                    }
+
+                }
+                if (!"".equals(txt) && !txt.isEmpty()) { //se verifica que en txt haya algo
+
+                    String[] txt_split = txt.split("\n");
+                    int i = 0;
+                    if ("Restaurantes".equals(txt_split[i])) {
+                        i++;
+                        while (!txt_split[i].equals("Clientes")) {
+                            String[] restaurantes_split = txt_split[i].split(",");
+                            listaRestaurantes.agregarFinal(restaurantes_split[0].charAt(0), restaurantes_split[1], restaurantes_split[2].split("/"));
+                            i++;
+                        }
+                    }
+                    if ("Clientes".equals(txt_split[i])) {
+
+                        i++;
+                        while (!txt_split[i].equals("Pedidos")) {
+
+                            String[] clientes_split = txt_split[i].split(",");
+                            listaClientes.agregarFinal(clientes_split[0].charAt(0), clientes_split[1], clientes_split[2], Integer.parseInt(clientes_split[3]));
+                            i++;
+                        }
+
+                    }
+                }
+                br.close();
+                JOptionPane.showMessageDialog(null, "Lectura exitosa.");
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al leer");
+        }
+
+    }
+
+    public void escribirTxt() {
+
     }
 
 }
