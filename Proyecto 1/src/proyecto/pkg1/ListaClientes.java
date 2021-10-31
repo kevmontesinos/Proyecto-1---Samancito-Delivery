@@ -80,6 +80,16 @@ public class ListaClientes {
         return null;
     }
     
+    public char[] getDireccionesClientes(){
+        char[] direcciones = new char[tamano];
+        NodoCliente aux = primero;
+        for (int i =0; i< tamano; i++){
+            direcciones[i] = aux.getDireccion();
+            aux = aux.getSiguiente();            
+        }
+        return direcciones;
+    }
+    
     public void imprimirLista() {
         String info = "";
         if (esVacio()) {

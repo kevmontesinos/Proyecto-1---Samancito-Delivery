@@ -88,7 +88,7 @@ public class VentanaGeneral extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarArchivoActionPerformed
-        
+       
     }//GEN-LAST:event_cargarArchivoActionPerformed
 
     private void rolUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rolUsuarioActionPerformed

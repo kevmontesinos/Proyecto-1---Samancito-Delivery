@@ -84,7 +84,7 @@ public class VentanaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_volverActionPerformed
 
     private void nuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoClienteActionPerformed
-        new VentanaNuevoCliente().setVisible(true);
+        new VentanaNuevoCliente(listas).setVisible(true);
         dispose();
     }//GEN-LAST:event_nuevoClienteActionPerformed
 

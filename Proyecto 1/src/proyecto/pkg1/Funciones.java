@@ -23,7 +23,7 @@ public class Funciones {
         ListaClientes listaClientes = new ListaClientes();
         ListaPedidos listaPedidos = new ListaPedidos();
         ListaRutas listaRutas = new ListaRutas();
-        
+
         String line;
         String txt = ""; //donde se guardará todo
         String path = "test\\data.txt";
@@ -91,11 +91,15 @@ public class Funciones {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al leer");
         }
-        
+
         return new Listas(listaRestaurantes, listaClientes, listaPedidos, listaRutas);
     }
 
-    public void leerTxtCargado(ListaRestaurantes listaRestaurantes, ListaClientes listaClientes, ListaPedidos listaPedidos, ListaRutas listaRutas) {
+    public Listas leerTxtCargado() {
+        ListaRestaurantes listaRestaurantes = new ListaRestaurantes();
+        ListaClientes listaClientes = new ListaClientes();
+        ListaPedidos listaPedidos = new ListaPedidos();
+        ListaRutas listaRutas = new ListaRutas();
 
         String line;
         String txt = ""; //donde se guardará todo
@@ -163,10 +167,16 @@ public class Funciones {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al leer");
         }
+        return new Listas(listaRestaurantes, listaClientes, listaPedidos, listaRutas);
 
     }
 
-    public void escribirTxt(ListaRestaurantes listaRestaurantes, ListaClientes listaClientes, ListaPedidos listaPedidos, ListaRutas listaRutas) {
+    public void escribirTxt(Listas listas) {
+        ListaRestaurantes listaRestaurantes = listas.getListaRestaurantes();
+        ListaClientes listaClientes = listas.getListaClientes();
+        ListaPedidos listaPedidos = listas.getListaPedidos();
+        ListaRutas listaRutas = listas.getListaRutas();
+        
         String info = "";
         info += listaRestaurantes.getInformacionLista();
         info += listaClientes.getInformacionLista();

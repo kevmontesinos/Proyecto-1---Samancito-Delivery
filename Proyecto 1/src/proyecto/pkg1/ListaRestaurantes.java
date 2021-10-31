@@ -44,15 +44,16 @@ public class ListaRestaurantes {
         }
         tamano++;
     }
-    
-    public String getMenu(NodoRestaurante nodo){
+
+    public String getMenu(NodoRestaurante nodo) {
         String info = "";
-        for (int i = 0; i < nodo.getMenu().length; i++){
+        for (int i = 0; i < nodo.getMenu().length; i++) {
             info += nodo.getMenu()[i];
-            if (i < nodo.getMenu().length - 1)
+            if (i < nodo.getMenu().length - 1) {
                 info += "/";
+            }
         }
-        
+
         return info;
     }
 
@@ -63,45 +64,54 @@ public class ListaRestaurantes {
             NodoRestaurante aux = primero;
 
             for (int i = 0; i < tamano; i++) {
-                info += aux.getDireccion() + ","  + aux.getNombre() + "," + getMenu(aux) + "\n";
+                info += aux.getDireccion() + "," + aux.getNombre() + "," + getMenu(aux) + "\n";
                 aux = aux.getSiguiente();
             }
         }
         return info;
     }
-    
-    public String[] getArrayRest(){
+
+    public String[] getArrayRest() {
         String[] restaurantes = new String[tamano];
         NodoRestaurante aux = primero;
-        for (int i = 0; i < tamano; i++){
+        for (int i = 0; i < tamano; i++) {
             restaurantes[i] = aux.getNombre();
             aux = aux.getSiguiente();
         }
         return restaurantes;
     }
-    
-    public String[] buscarRest(String restaurante){
+
+    public String[] buscarRest(String restaurante) {
         NodoRestaurante aux = primero;
-        for (int i = 0; i < tamano; i++){
-            if (aux.getNombre().equals(restaurante)){
+        for (int i = 0; i < tamano; i++) {
+            if (aux.getNombre().equals(restaurante)) {
                 return aux.getMenu();
             }
             aux = aux.getSiguiente();
         }
-        
+
         return null;
     }
-    
-          
-    public NodoRestaurante getNodo(String restaurante){
+
+    public NodoRestaurante getNodo(String restaurante) {
         NodoRestaurante aux = primero;
-        for (int i = 0; i < tamano; i++){
-            if (aux.getNombre().equals(restaurante)){
+        for (int i = 0; i < tamano; i++) {
+            if (aux.getNombre().equals(restaurante)) {
                 return aux;
             }
             aux = aux.getSiguiente();
         }
         return null;
+    }
+
+    public char[] getDireccionesRestaurantes() {
+        char[] direcciones = new char[tamano];
+        NodoRestaurante aux = primero;
+        for (int i = 0; i < tamano; i++) {
+            direcciones[i] = aux.getDireccion();
+            aux = aux.getSiguiente();
+        }
+        return direcciones;
     }
 
     public void imprimirLista() {

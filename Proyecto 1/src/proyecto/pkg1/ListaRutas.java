@@ -58,7 +58,7 @@ public class ListaRutas {
         }
         return info;
     }
-
+    
     public void imprimirLista() {
         String info = "";
         if (esVacio()) {

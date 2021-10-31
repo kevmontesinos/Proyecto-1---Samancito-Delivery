@@ -5,18 +5,44 @@
  */
 package Interfaces;
 
+import javax.swing.JOptionPane;
+import proyecto.pkg1.Listas;
+
 /**
  *
  * @author Kevin
  */
 public class VentanaNuevoCliente extends javax.swing.JFrame {
 
+    Listas listas;
+
     /**
      * Creates new form VentanaNuevoCliente
      */
-    public VentanaNuevoCliente() {
+    public VentanaNuevoCliente(Listas listas) {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.listas = listas;
+        char[] dirClientes = listas.getListaClientes().getDireccionesClientes();
+        char[] dirRest = listas.getListaRestaurantes().getDireccionesRestaurantes();
+        char[] direcciones = new char[dirClientes.length + dirRest.length];
+        
+        int j=0;
+        for (int i = 0; i < dirRest.length; i++){
+            direcciones[j] = dirRest[i];
+            j++;
+        }
+        for (int i=0; i<dirClientes.length;i++){
+            direcciones[j] = dirClientes[i];
+            j++;
+        }
+        
+        for (int i = 0; i < direcciones.length; i++){
+            entrada.addItem(String.valueOf(direcciones[i]));
+            salida.addItem(String.valueOf(direcciones[i]));
+        }
+        
+
     }
 
     /**
@@ -72,22 +98,24 @@ public class VentanaNuevoCliente extends javax.swing.JFrame {
         jLabel5.setText("Seleccione una direccion de salida: ");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, -1, -1));
 
-        entrada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(entrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 190, -1));
 
         jLabel6.setText("Seleccione una direccion de entrada: ");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, -1, -1));
 
-        salida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, 190, -1));
-        jPanel1.add(pesoSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, -1, -1));
-        jPanel1.add(pesoEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 150, -1, -1));
+
+        pesoSalida.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        jPanel1.add(pesoSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 70, -1));
+
+        pesoEntrada.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        jPanel1.add(pesoEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 150, 70, -1));
 
         jLabel7.setText("Distancia:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, -1, -1));
 
         jLabel8.setText("Distancia:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, -1, -1));
 
         cancelar.setText("Cancelar");
         cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -98,52 +126,80 @@ public class VentanaNuevoCliente extends javax.swing.JFrame {
         jPanel1.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 100, -1));
 
         agregar.setText("Agregar cliente");
+        agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarActionPerformed(evt);
+            }
+        });
         jPanel1.add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 290, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 360));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 360));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-//        new VentanaCliente().setVisible(true);
-//        dispose();
+        new VentanaCliente(listas).setVisible(true);
+        dispose();
     }//GEN-LAST:event_cancelarActionPerformed
+
+    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+        //falta validar que sea una letra la direccion, no sea numero, la letra que se ponga no esté ya escogida, 
+        try{
+            if (!nombre.getText().isEmpty() && !apellido.getText().isEmpty() && !cedula.getText().isEmpty() && !direccion.getText().isEmpty()){
+                if (!entrada.getSelectedItem().toString().equals(salida.getSelectedItem().toString())){
+                    listas.getListaClientes().agregarFinal(direccion.getText().charAt(0), nombre.getText(), apellido.getText(), Integer.parseInt(cedula.getText()));
+                    listas.getListaRutas().agregarFinal(entrada.getSelectedItem().toString().charAt(0), direccion.getText().charAt(0), Integer.parseInt(pesoEntrada.getValue().toString()));
+                    listas.getListaRutas().agregarFinal(direccion.getText().charAt(0), salida.getSelectedItem().toString().charAt(0), Integer.parseInt(pesoSalida.getValue().toString()));
+                    JOptionPane.showMessageDialog(null, "El cliente fue agregado correctamente");
+                    new VentanaCliente(listas).setVisible(true);
+                    dispose();
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "La dirección de entrada y salida no pueden coincidir.");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "No se pudo agregar el cliente, complete los campos correctamente.");
+        }
+    }//GEN-LAST:event_agregarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaNuevoCliente().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(VentanaNuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(VentanaNuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(VentanaNuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(VentanaNuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new VentanaNuevoCliente().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregar;
