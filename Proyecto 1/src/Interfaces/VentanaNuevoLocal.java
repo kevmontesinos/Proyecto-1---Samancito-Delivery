@@ -5,6 +5,8 @@
  */
 package Interfaces;
 
+import javax.swing.JOptionPane;
+import proyecto.pkg1.Funciones;
 import proyecto.pkg1.Listas;
 
 /**
@@ -16,17 +18,33 @@ public class VentanaNuevoLocal extends javax.swing.JFrame {
     Listas listas;
     String menu;
     VentanaOtroPlato otroPlato;
+    Funciones f;
 
     /**
      * Creates new form VentanaNuevoLocal
      */
     public VentanaNuevoLocal(Listas listas) {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.listas = listas;
+        this.otroPlato = new VentanaOtroPlato(this);
+        this.f = new Funciones();
+        this.menu = "";
+
+        char[] direcciones = f.getDirecciones(listas);
+
+        for (int i = 0; i < direcciones.length; i++) {
+            entrada.addItem(String.valueOf(direcciones[i]));
+            salida.addItem(String.valueOf(direcciones[i]));
+        }
+
     }
 
     public void comunicacion(String plato) {
-        //this.menu += info;
+
+        this.menu += plato + "/";
+        this.setVisible(true);
+        
 
     }
 
@@ -49,13 +67,12 @@ public class VentanaNuevoLocal extends javax.swing.JFrame {
         salida = new javax.swing.JComboBox<>();
         pesoSalida = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        direccion = new javax.swing.JTextField();
         nombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        cancelar = new javax.swing.JButton();
         agregarPlato = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        agregarLocal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -86,14 +103,19 @@ public class VentanaNuevoLocal extends javax.swing.JFrame {
 
         jLabel1.setText("Dirección:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 190, -1));
+        jPanel1.add(direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 200, -1));
         jPanel1.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 200, -1));
 
         jLabel2.setText("Nombre del nuevo local: ");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
-        jButton1.setText("Cancelar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, -1, -1));
+        cancelar.setText("Cancelar");
+        cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, -1, -1));
 
         agregarPlato.setText("Agregar plato");
         agregarPlato.addActionListener(new java.awt.event.ActionListener() {
@@ -103,11 +125,13 @@ public class VentanaNuevoLocal extends javax.swing.JFrame {
         });
         jPanel1.add(agregarPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, -1, -1));
 
-        jButton3.setText("Agregar local");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, -1, -1));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, -1, -1));
+        agregarLocal.setText("Agregar local");
+        agregarLocal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarLocalActionPerformed(evt);
+            }
+        });
+        jPanel1.add(agregarLocal, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 370));
 
@@ -115,16 +139,51 @@ public class VentanaNuevoLocal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarPlatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPlatoActionPerformed
+        otroPlato.setVisible(true);
+        setVisible(false);
 
     }//GEN-LAST:event_agregarPlatoActionPerformed
 
+    private void agregarLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarLocalActionPerformed
+        try {
+            if (!nombre.getText().isBlank() && !direccion.getText().isBlank() && !menu.isBlank()) {
+                String menu_str = menu.substring(0, menu.length()-1);
+                if (!entrada.getSelectedItem().toString().equals(salida.getSelectedItem().toString())) {
+                    listas.getListaRestaurantes().agregarFinal(direccion.getText().charAt(0), nombre.getText(), menu_str.split("/"));
+                    listas.getListaRutas().agregarFinal(entrada.getSelectedItem().toString().charAt(0), direccion.getText().charAt(0), Integer.parseInt(pesoEntrada.getValue().toString()));
+                    listas.getListaRutas().agregarFinal(direccion.getText().charAt(0), salida.getSelectedItem().toString().charAt(0), Integer.parseInt(pesoSalida.getValue().toString()));
+                    JOptionPane.showMessageDialog(null, "El cliente fue agregado correctamente");
+                    new VentanaCliente(listas).setVisible(true);
+                    dispose();
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "La dirección de entrada y salida no pueden coincidir.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo agregar el cliente, complete los campos correctamente.");
+        }
+        
+        JOptionPane.showMessageDialog(null, listas.getListaRestaurantes().getInformacionLista());
+        JOptionPane.showMessageDialog(null, listas.getListaClientes().getInformacionLista());
+        JOptionPane.showMessageDialog(null, listas.getListaPedidos().getInformacionLista());
+        JOptionPane.showMessageDialog(null, listas.getListaRutas().getInformacionLista());
+    }//GEN-LAST:event_agregarLocalActionPerformed
+
+    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+        new VentanaAdmin(listas).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_cancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agregarLocal;
     private javax.swing.JButton agregarPlato;
+    private javax.swing.JButton cancelar;
+    private javax.swing.JTextField direccion;
     private javax.swing.JComboBox<String> entrada;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
@@ -132,7 +191,6 @@ public class VentanaNuevoLocal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField nombre;
     private javax.swing.JSpinner pesoEntrada;
     private javax.swing.JSpinner pesoSalida;

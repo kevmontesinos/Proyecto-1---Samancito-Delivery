@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+import javax.swing.JOptionPane;
 import proyecto.pkg1.Funciones;
 import proyecto.pkg1.Listas;
 
@@ -13,8 +14,10 @@ import proyecto.pkg1.Listas;
  * @author Kevin
  */
 public class VentanaGeneral extends javax.swing.JFrame {
+
     Funciones f;
     Listas listas;
+    boolean archivo;
 
     /**
      * Creates new form VentanaGeneral
@@ -24,7 +27,8 @@ public class VentanaGeneral extends javax.swing.JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         f = new Funciones();
-        
+        archivo = false;
+
     }
 
     /**
@@ -88,17 +92,26 @@ public class VentanaGeneral extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarArchivoActionPerformed
-       
+
     }//GEN-LAST:event_cargarArchivoActionPerformed
 
     private void rolUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rolUsuarioActionPerformed
-        new VentanaRolUsuario(listas).setVisible(true);
-        dispose();
+        if (archivo) {
+            new VentanaRolUsuario(listas).setVisible(true);
+            dispose();
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe cargar un archivo primero para continuar");
+        }
     }//GEN-LAST:event_rolUsuarioActionPerformed
 
     private void continuarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarArchivoActionPerformed
         listas = f.leerTxtPred();
-        
+        if (!listas.getListaClientes().esVacio() && !listas.getListaRestaurantes().esVacio() && !listas.getListaPedidos().esVacio() && !listas.getListaRutas().esVacio()) {
+            archivo = true;
+        } else {
+            archivo = false;
+        }
+
     }//GEN-LAST:event_continuarArchivoActionPerformed
 
     /**

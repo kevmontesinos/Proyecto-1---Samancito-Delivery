@@ -5,20 +5,46 @@
  */
 package Interfaces;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Kevin
  */
 public class VentanaOtroPlato extends javax.swing.JFrame {
 
+    VentanaNuevoLocal nuevoLocal;
+    VentanaAgregarPlato ventanaAgregarPlato;
+    int ventana;
+
     /**
      * Creates new form VentanaOtroPlato
      */
-    public VentanaOtroPlato() {
+    public VentanaOtroPlato(VentanaNuevoLocal nuevoLocal) {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.nuevoLocal = nuevoLocal;
+        this.ventana = 1;
     }
-    
-    
+
+    public VentanaOtroPlato(VentanaAgregarPlato ventanaAgregarPlato) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.ventanaAgregarPlato = ventanaAgregarPlato;
+        this.ventana = 2;
+    }
+
+    private void Enviar(String info) {
+        if (ventana == 1) {
+            nuevoLocal.comunicacion(info);
+
+        } else {
+            ventanaAgregarPlato.comunicacion(info);
+        }
+        plato.setText("");
+        dispose();
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,7 +57,7 @@ public class VentanaOtroPlato extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        plato = new javax.swing.JTextField();
         agregarPlato = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -41,7 +67,13 @@ public class VentanaOtroPlato extends javax.swing.JFrame {
 
         jLabel1.setText("Ingrese el nombre del plato:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 150, -1));
+
+        plato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                platoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(plato, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 150, -1));
 
         agregarPlato.setText("Agregar plato");
         agregarPlato.addActionListener(new java.awt.event.ActionListener() {
@@ -57,48 +89,23 @@ public class VentanaOtroPlato extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarPlatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPlatoActionPerformed
-        // TODO add your handling code here:
+        if (!plato.getText().isBlank()) {
+            Enviar(plato.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "No puede dejar vacío la casilla");
+        }
+
     }//GEN-LAST:event_agregarPlatoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaOtroPlato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaOtroPlato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaOtroPlato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaOtroPlato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void platoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_platoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_platoActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaOtroPlato().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarPlato;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField plato;
     // End of variables declaration//GEN-END:variables
 }

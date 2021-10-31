@@ -114,6 +114,45 @@ public class ListaRestaurantes {
         return direcciones;
     }
 
+    public void setMenus(String restaurante, String agregado) {
+        NodoRestaurante aux = primero;
+        String menuActual = "";
+        for (int i = 0; i < tamano; i++) {
+            if (restaurante.equals(aux.getNombre())) {
+                for (int j = 0; j < aux.getMenu().length; j++) {
+                    menuActual += aux.getMenu()[j] + "/";
+
+                }
+                break;
+            }
+            aux = aux.getSiguiente();
+        }
+        agregado = menuActual + agregado;
+        agregado = agregado.substring(0, agregado.length() - 1);
+        System.out.println(agregado);
+        aux.setMenu(agregado.split("/"));
+    }
+
+    public void EliminarPlato(String restaurante, String plato) {
+        NodoRestaurante aux = primero;
+        String menuActual = "";
+        for (int i = 0; i < tamano; i++) {
+            if (restaurante.equals(aux.getNombre())) {
+                for (int j = 0; j < aux.getMenu().length; j++) {
+                    menuActual += aux.getMenu()[j] + "/";
+
+                }
+                break;
+            }
+            aux = aux.getSiguiente();
+        }
+
+        menuActual = menuActual.replace(plato + "/", "");
+        menuActual = menuActual.substring(0, menuActual.length() - 1);
+        aux.setMenu(menuActual.split("/"));
+
+    }
+
     public void imprimirLista() {
         String info = "";
         if (esVacio()) {

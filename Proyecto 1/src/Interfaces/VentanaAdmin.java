@@ -19,6 +19,7 @@ public class VentanaAdmin extends javax.swing.JFrame {
      */
     public VentanaAdmin(Listas listas) {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.listas = listas;
     }
 
@@ -34,8 +35,8 @@ public class VentanaAdmin extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        agregarPlatos = new javax.swing.JButton();
+        eliminarPlatos = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,15 +53,35 @@ public class VentanaAdmin extends javax.swing.JFrame {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 170, -1));
 
         jButton2.setText("Agregar nuevo camino");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 170, -1));
 
-        jButton3.setText("Agregar platos");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 170, -1));
+        agregarPlatos.setText("Agregar platos");
+        agregarPlatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarPlatosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(agregarPlatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 170, -1));
 
-        jButton4.setText("Eliminar platos");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 170, -1));
+        eliminarPlatos.setText("Eliminar platos");
+        eliminarPlatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarPlatosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(eliminarPlatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 170, -1));
 
         jButton5.setText("Volver al menú");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 170, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 360));
@@ -73,12 +94,32 @@ public class VentanaAdmin extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new VentanaNuevoCamino(listas).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        new VentanaRolUsuario(listas).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void agregarPlatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPlatosActionPerformed
+        new VentanaAgregarPlato(listas).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_agregarPlatosActionPerformed
+
+    private void eliminarPlatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPlatosActionPerformed
+        new VentanaEliminarPlato(listas).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_eliminarPlatosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agregarPlatos;
+    private javax.swing.JButton eliminarPlatos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

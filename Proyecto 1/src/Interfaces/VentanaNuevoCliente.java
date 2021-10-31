@@ -6,6 +6,7 @@
 package Interfaces;
 
 import javax.swing.JOptionPane;
+import proyecto.pkg1.Funciones;
 import proyecto.pkg1.Listas;
 
 /**
@@ -15,6 +16,7 @@ import proyecto.pkg1.Listas;
 public class VentanaNuevoCliente extends javax.swing.JFrame {
 
     Listas listas;
+    Funciones f;
 
     /**
      * Creates new form VentanaNuevoCliente
@@ -23,19 +25,22 @@ public class VentanaNuevoCliente extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.listas = listas;
-        char[] dirClientes = listas.getListaClientes().getDireccionesClientes();
-        char[] dirRest = listas.getListaRestaurantes().getDireccionesRestaurantes();
-        char[] direcciones = new char[dirClientes.length + dirRest.length];
-        
-        int j=0;
-        for (int i = 0; i < dirRest.length; i++){
-            direcciones[j] = dirRest[i];
-            j++;
-        }
-        for (int i=0; i<dirClientes.length;i++){
-            direcciones[j] = dirClientes[i];
-            j++;
-        }
+        f = new Funciones();
+//        char[] dirClientes = listas.getListaClientes().getDireccionesClientes();
+//        char[] dirRest = listas.getListaRestaurantes().getDireccionesRestaurantes();
+//        char[] direcciones = new char[dirClientes.length + dirRest.length];
+//        
+//        int j=0;
+//        for (int i = 0; i < dirRest.length; i++){
+//            direcciones[j] = dirRest[i];
+//            j++;
+//        }
+//        for (int i=0; i<dirClientes.length;i++){
+//            direcciones[j] = dirClientes[i];
+//            j++;
+//        }
+
+        char[] direcciones = f.getDirecciones(listas);
         
         for (int i = 0; i < direcciones.length; i++){
             entrada.addItem(String.valueOf(direcciones[i]));
@@ -146,7 +151,7 @@ public class VentanaNuevoCliente extends javax.swing.JFrame {
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         //falta validar que sea una letra la direccion, no sea numero, la letra que se ponga no esté ya escogida, 
         try{
-            if (!nombre.getText().isEmpty() && !apellido.getText().isEmpty() && !cedula.getText().isEmpty() && !direccion.getText().isEmpty()){
+            if (!nombre.getText().isBlank() && !apellido.getText().isBlank() && !cedula.getText().isBlank() && !direccion.getText().isBlank()){
                 if (!entrada.getSelectedItem().toString().equals(salida.getSelectedItem().toString())){
                     listas.getListaClientes().agregarFinal(direccion.getText().charAt(0), nombre.getText(), apellido.getText(), Integer.parseInt(cedula.getText()));
                     listas.getListaRutas().agregarFinal(entrada.getSelectedItem().toString().charAt(0), direccion.getText().charAt(0), Integer.parseInt(pesoEntrada.getValue().toString()));

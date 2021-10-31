@@ -176,7 +176,7 @@ public class Funciones {
         ListaClientes listaClientes = listas.getListaClientes();
         ListaPedidos listaPedidos = listas.getListaPedidos();
         ListaRutas listaRutas = listas.getListaRutas();
-        
+
         String info = "";
         info += listaRestaurantes.getInformacionLista();
         info += listaClientes.getInformacionLista();
@@ -192,6 +192,24 @@ public class Funciones {
             JOptionPane.showMessageDialog(null, "Error al guardar");
         }
 
+    }
+
+    public char[] getDirecciones(Listas listas) {
+        char[] dirClientes = listas.getListaClientes().getDireccionesClientes();
+        char[] dirRest = listas.getListaRestaurantes().getDireccionesRestaurantes();
+        char[] direcciones = new char[dirClientes.length + dirRest.length];
+
+        int j = 0;
+        for (int i = 0; i < dirRest.length; i++) {
+            direcciones[j] = dirRest[i];
+            j++;
+        }
+        for (int i = 0; i < dirClientes.length; i++) {
+            direcciones[j] = dirClientes[i];
+            j++;
+        }
+
+       return direcciones;
     }
 
 }

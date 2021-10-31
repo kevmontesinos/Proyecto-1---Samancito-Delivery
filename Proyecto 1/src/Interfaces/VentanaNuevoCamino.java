@@ -5,17 +5,35 @@
  */
 package Interfaces;
 
+import javax.swing.JOptionPane;
+import proyecto.pkg1.Funciones;
+import proyecto.pkg1.Listas;
+
 /**
  *
  * @author Kevin
  */
 public class VentanaNuevoCamino extends javax.swing.JFrame {
 
+    Funciones f;
+    Listas listas;
+
     /**
      * Creates new form VentanaNuevoCamino
+     *
+     * @param listas
      */
-    public VentanaNuevoCamino() {
+    public VentanaNuevoCamino(Listas listas) {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.listas = listas;
+        this.f = new Funciones();
+        char[] direcciones = f.getDirecciones(listas);
+
+        for (int i = 0; i < direcciones.length; i++) {
+            origen.addItem(String.valueOf(direcciones[i]));
+            destino.addItem(String.valueOf(direcciones[i]));
+        }
     }
 
     /**
@@ -27,57 +45,96 @@ public class VentanaNuevoCamino extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        origen = new javax.swing.JComboBox<>();
+        destino = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        distancia = new javax.swing.JSpinner();
+        agregarCamino = new javax.swing.JButton();
+        cancelar = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.add(origen, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 80, -1));
+
+        jPanel1.add(destino, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 80, -1));
+
+        jLabel1.setText("Destino");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, -1, -1));
+
+        jLabel2.setText("Origen");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, -1));
+
+        jLabel3.setText("Distancia");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, -1, -1));
+
+        distancia.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        jPanel1.add(distancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, 80, -1));
+
+        agregarCamino.setText("Agregar camino");
+        agregarCamino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarCaminoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(agregarCamino, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, -1, -1));
+
+        cancelar.setText("Cancelar");
+        cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 110, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 340));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void agregarCaminoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCaminoActionPerformed
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoCamino.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoCamino.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoCamino.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoCamino.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaNuevoCamino().setVisible(true);
+            if (!origen.getSelectedItem().toString().equals(destino.getSelectedItem().toString())) {
+
+                listas.getListaRutas().agregarFinal(origen.getSelectedItem().toString().charAt(0), destino.getSelectedItem().toString().charAt(0), Integer.parseInt(distancia.getValue().toString()));
+                JOptionPane.showMessageDialog(null, "El camino fue agregado correctamente");
+                new VentanaAdmin(listas).setVisible(true);
+                dispose();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "La dirección de entrada y salida no pueden coincidir.");
             }
-        });
+
+        }
+    
+    catch (Exception e){
+        JOptionPane.showMessageDialog(null, "No se pudo agregar el camino.");
     }
 
+  
+    }//GEN-LAST:event_agregarCaminoActionPerformed
+
+    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+        new VentanaAdmin(listas).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_cancelarActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agregarCamino;
+    private javax.swing.JButton cancelar;
+    private javax.swing.JComboBox<String> destino;
+    private javax.swing.JSpinner distancia;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JComboBox<String> origen;
     // End of variables declaration//GEN-END:variables
 }
