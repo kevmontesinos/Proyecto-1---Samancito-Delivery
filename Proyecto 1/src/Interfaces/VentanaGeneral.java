@@ -54,7 +54,7 @@ public class VentanaGeneral extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Bienvenido a Samancito Delivery");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 190, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 190, -1));
 
         cargarArchivo.setText("Cargar archivo ");
         cargarArchivo.addActionListener(new java.awt.event.ActionListener() {
@@ -92,14 +92,19 @@ public class VentanaGeneral extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarArchivoActionPerformed
-
+        listas = f.leerTxtCargado();
+        if (!listas.getListaClientes().esVacio() && !listas.getListaRestaurantes().esVacio() && !listas.getListaPedidos().esVacio() && !listas.getListaRutas().esVacio()) {
+            archivo = true;
+        } else {
+            archivo = false;
+        }
     }//GEN-LAST:event_cargarArchivoActionPerformed
 
     private void rolUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rolUsuarioActionPerformed
         if (archivo) {
             new VentanaRolUsuario(listas).setVisible(true);
             dispose();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Debe cargar un archivo primero para continuar");
         }
     }//GEN-LAST:event_rolUsuarioActionPerformed
@@ -113,41 +118,6 @@ public class VentanaGeneral extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_continuarArchivoActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(VentanaGeneral.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(VentanaGeneral.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(VentanaGeneral.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(VentanaGeneral.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new VentanaGeneral().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cargarArchivo;

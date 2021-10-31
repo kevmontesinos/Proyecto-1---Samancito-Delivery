@@ -56,6 +56,18 @@ public class ListaPedidos {
 
         return info;
     }
+    
+   
+    
+    public String[] getListaPedidos(){
+        String[] pedidos = new String[tamano];
+        NodoPedido aux = primero;
+        for (int i = 0; i < tamano; i++){
+            pedidos[i] = getPedidos(aux);
+            aux = aux.getSiguiente();
+        }
+        return pedidos;
+    }
 
     public String getInformacionLista() {
         String info = "Pedidos\n";

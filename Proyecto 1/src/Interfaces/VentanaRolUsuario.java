@@ -64,6 +64,11 @@ public class VentanaRolUsuario extends javax.swing.JFrame {
         jPanel1.add(admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 140, -1));
 
         driver.setText("Driver");
+        driver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                driverActionPerformed(evt);
+            }
+        });
         jPanel1.add(driver, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 140, -1));
 
         cliente.setText("Cliente");
@@ -93,6 +98,11 @@ public class VentanaRolUsuario extends javax.swing.JFrame {
         new VentanaGeneral().setVisible(true);
         dispose();
     }//GEN-LAST:event_volverActionPerformed
+
+    private void driverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_driverActionPerformed
+        new VentanaDriver(listas).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_driverActionPerformed
 
     /**
      * @param args the command line arguments
