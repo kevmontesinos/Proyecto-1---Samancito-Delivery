@@ -76,6 +76,11 @@ public class VentanaGeneral extends javax.swing.JFrame {
         jPanel1.add(recorrerGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 240, -1));
 
         mostrarGrafo.setText("Mostrar grafo");
+        mostrarGrafo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarGrafoActionPerformed(evt);
+            }
+        });
         jPanel1.add(mostrarGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 240, -1));
 
         rolUsuario.setText("Seleccionar rol de usuario");
@@ -118,6 +123,10 @@ public class VentanaGeneral extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_continuarArchivoActionPerformed
+
+    private void mostrarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarGrafoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mostrarGrafoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cargarArchivo;
