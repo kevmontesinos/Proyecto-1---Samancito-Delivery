@@ -85,7 +85,8 @@ public class VentanaRolUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_clienteActionPerformed
 
     private void adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminActionPerformed
-        // TODO add your handling code here:
+        new VentanaAdmin(listas).setVisible(true);
+        dispose();
     }//GEN-LAST:event_adminActionPerformed
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
