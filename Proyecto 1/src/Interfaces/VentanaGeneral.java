@@ -56,6 +56,7 @@ public class VentanaGeneral extends javax.swing.JFrame {
         recorrerGrafo = new javax.swing.JButton();
         mostrarGrafo = new javax.swing.JButton();
         rolUsuario = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -100,6 +101,14 @@ public class VentanaGeneral extends javax.swing.JFrame {
         });
         jPanel1.add(rolUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 270, -1));
 
+        jButton1.setText("Mostrar info listas (se borra cuando se entregue el final)");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 380, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 410));
 
         pack();
@@ -126,6 +135,10 @@ public class VentanaGeneral extends javax.swing.JFrame {
     private void continuarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarArchivoActionPerformed
         listas = f.leerTxtPred();
         if (!listas.getListaClientes().esVacio() && !listas.getListaRestaurantes().esVacio() && !listas.getListaPedidos().esVacio() && !listas.getListaRutas().esVacio()) {
+            char[] direcciones = f.getDirecciones(listas);
+            for (int i = 0; i < direcciones.length; i++) {
+                listas.getListaDirecciones().agregarFinal(Character.toString(direcciones[i]));
+            }
             archivo = true;
         } else {
             archivo = false;
@@ -136,7 +149,7 @@ public class VentanaGeneral extends javax.swing.JFrame {
     private void mostrarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarGrafoActionPerformed
         if (archivo) {
             f.generarGrafoJpg(listas);
-            
+
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException ex) {
@@ -149,9 +162,22 @@ public class VentanaGeneral extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mostrarGrafoActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String informacionListas = "";
+        informacionListas += listas.getListaRestaurantes().getInformacionLista();
+        informacionListas += listas.getListaClientes().getInformacionLista();
+        informacionListas += listas.getListaPedidos().getInformacionLista();
+        informacionListas += listas.getListaRutas().getInformacionLista();
+        
+        JOptionPane.showMessageDialog(null, informacionListas);
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cargarArchivo;
     private javax.swing.JButton continuarArchivo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton mostrarGrafo;

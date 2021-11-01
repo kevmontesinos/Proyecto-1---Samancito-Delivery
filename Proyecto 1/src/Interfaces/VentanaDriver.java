@@ -5,25 +5,35 @@
  */
 package Interfaces;
 
+import proyecto.pkg1.Dijkstra;
+import proyecto.pkg1.ListaDirecciones;
 import proyecto.pkg1.Listas;
+import proyecto.pkg1.MatrizAdyacencia;
 
 /**
  *
  * @author Kevin
  */
 public class VentanaDriver extends javax.swing.JFrame {
+
     Listas listas;
+    MatrizAdyacencia matrizAdy;
+    Dijkstra dk;
+    ListaDirecciones ld;
+
     /**
      * Creates new form VentanaDriver
+     *
      * @param listas
      */
     public VentanaDriver(Listas listas) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.listas = listas;
-        String[] pedidos = listas.getListaPedidos().getListaPedidos();
-        
-        for (int i =0; i < pedidos.length;i++){
+        this.ld = listas.getListaDirecciones();
+        String[] pedidos = listas.getListaPedidos().getArrayPedidos();
+
+        for (int i = 0; i < pedidos.length; i++) {
             pedido.addItem(pedidos[i]);
         }
     }
@@ -41,7 +51,7 @@ public class VentanaDriver extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         pedido = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Dijkstra = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -58,8 +68,13 @@ public class VentanaDriver extends javax.swing.JFrame {
         jLabel2.setText("Seleccione el algoritmo por el cual desea saber la ruta de envío:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 390, -1));
 
-        jButton1.setText(" Dijkstra");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 120, -1));
+        Dijkstra.setText(" Dijkstra");
+        Dijkstra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DijkstraActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Dijkstra, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 120, -1));
 
         jButton2.setText("Floyd-Warshall");
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 120, -1));
@@ -83,8 +98,30 @@ public class VentanaDriver extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void DijkstraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DijkstraActionPerformed
+        String seleccionado = pedido.getSelectedItem().toString();
+        char origen = seleccionado.charAt(0);
+        char destino = seleccionado.charAt(6);
+        
+        System.out.println(origen);
+        System.out.println(destino);
+
+        matrizAdy = new MatrizAdyacencia(listas.getListaDirecciones().getTamano());
+        String[] rutas = listas.getListaRutas().getArrayRutas();
+        
+        for (int i = 0; i < rutas.length; i++) {
+
+            matrizAdy.agregarVert(ld.getPosicionInt(rutas[i].split(",")[0]), ld.getPosicionInt(rutas[i].split(",")[1]), Integer.parseInt(rutas[i].split(",")[2]));
+        }
+        int[][] matriz = matrizAdy.getMatriz();
+
+        dk = new Dijkstra();
+        dk.Dijkstra(matriz, ld.getPosicionInt(Character.toString(origen)), ld, Character.toString(destino));
+
+    }//GEN-LAST:event_DijkstraActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Dijkstra;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

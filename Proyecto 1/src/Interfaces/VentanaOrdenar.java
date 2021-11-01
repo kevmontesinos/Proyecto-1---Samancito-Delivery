@@ -143,7 +143,7 @@ public class VentanaOrdenar extends javax.swing.JFrame {
         char direccionCliente = listas.getListaClientes().getNodo(Integer.valueOf(String.valueOf(cedula.getSelectedItem()))).getDireccion();
         char direccionRestaurante = listas.getListaRestaurantes().getNodo(String.valueOf(restaurante.getSelectedItem())).getDireccion();
         
-        String[] pedido = {numero.getValue().toString() + "-" + plato.getSelectedItem()};
+        String pedido = numero.getValue().toString() + "-" + plato.getSelectedItem();
         
         listas.getListaPedidos().agregarFinal(direccionCliente, direccionRestaurante, pedido);
         

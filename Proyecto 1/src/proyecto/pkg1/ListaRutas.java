@@ -81,6 +81,15 @@ public class ListaRutas {
         return false;
     }
     
+    public String[] getArrayRutas(){
+        NodoRuta aux = primero;
+        String[] rutas = new String[tamano];
+        for (int i=0; i < tamano; i++){
+            rutas[i] = aux.getOrigen() + "," + aux.getDestino() + "," + aux.getPeso();
+            aux = aux.getSiguiente();
+        }
+        return rutas;
+    }
     public void imprimirLista() {
         String info = "";
         if (esVacio()) {

@@ -15,12 +15,14 @@ public class Listas {
     private ListaClientes listaClientes;
     private ListaPedidos listaPedidos;
     private ListaRutas listaRutas;
+    private ListaDirecciones listaDirecciones;
 
     public Listas(ListaRestaurantes listaRestaurantes, ListaClientes listaClientes, ListaPedidos listaPedidos, ListaRutas listaRutas){
         this.listaRestaurantes = listaRestaurantes;
         this.listaClientes =  listaClientes;
         this.listaPedidos =  listaPedidos;
         this.listaRutas =  listaRutas;
+        this.listaDirecciones = new ListaDirecciones();
     } 
 
     public ListaRestaurantes getListaRestaurantes() {
@@ -53,6 +55,14 @@ public class Listas {
 
     public void setListaRutas(ListaRutas listaRutas) {
         this.listaRutas = listaRutas;
+    }
+
+    public ListaDirecciones getListaDirecciones() {
+        return listaDirecciones;
+    }
+
+    public void setListaDirecciones(ListaDirecciones listaDirecciones) {
+        this.listaDirecciones = listaDirecciones;
     }
     
     

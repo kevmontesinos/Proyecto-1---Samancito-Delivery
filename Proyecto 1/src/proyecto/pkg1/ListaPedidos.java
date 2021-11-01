@@ -33,7 +33,7 @@ public class ListaPedidos {
         return primero == null;
     }
 
-    public void agregarFinal(char direccionCliente, char direccionRestaurante, String[] pedido) {
+    public void agregarFinal(char direccionCliente, char direccionRestaurante, String pedido) {
         NodoPedido nuevo = new NodoPedido(direccionCliente, direccionRestaurante, pedido);
         if (esVacio()) {
             primero = nuevo;
@@ -45,25 +45,22 @@ public class ListaPedidos {
         tamano++;
     }
 
-    public String getPedidos(NodoPedido nodo) {
-        String info = "";
-        for (int i = 0; i < nodo.getPedido().length; i++) {
-            info += nodo.getPedido()[i];
-            if (i < nodo.getPedido().length - 1) {
-                info += "/";
-            }
-        }
-
-        return info;
-    }
-    
-   
-    
-    public String[] getListaPedidos(){
+//    public String getPedidos(NodoPedido nodo) {
+//        String info = "";
+//        for (int i = 0; i < nodo.getPedido().length; i++) {
+//            info += nodo.getPedido()[i];
+//            if (i < nodo.getPedido().length - 1) {
+//                info += "/";
+//            }
+//        }
+//
+//        return info;
+//    }
+    public String[] getArrayPedidos() {
         String[] pedidos = new String[tamano];
         NodoPedido aux = primero;
-        for (int i = 0; i < tamano; i++){
-            pedidos[i] = getPedidos(aux);
+        for (int i = 0; i < tamano; i++) {
+            pedidos[i] = aux.getDireccionCliente() + " ==> " + aux.getDireccionRestaurante() + "  " + aux.getPedido();
             aux = aux.getSiguiente();
         }
         return pedidos;
@@ -76,7 +73,7 @@ public class ListaPedidos {
             NodoPedido aux = primero;
 
             for (int i = 0; i < tamano; i++) {
-                info += aux.getDireccionCliente() + "," + aux.getDireccionRestaurante() + "," + getPedidos(aux) + "\n";
+                info += aux.getDireccionCliente() + "," + aux.getDireccionRestaurante() + "," + aux.getPedido() + "\n";
                 aux = aux.getSiguiente();
             }
         }

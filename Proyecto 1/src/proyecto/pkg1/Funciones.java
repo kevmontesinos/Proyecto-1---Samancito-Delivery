@@ -69,7 +69,7 @@ public class Funciones {
                         i++;
                         while (!txt_split[i].equals("Rutas")) {
                             String[] pedidos_split = txt_split[i].split(",");
-                            listaPedidos.agregarFinal(pedidos_split[0].charAt(0), pedidos_split[1].charAt(0), pedidos_split[2].split("/"));
+                            listaPedidos.agregarFinal(pedidos_split[0].charAt(0), pedidos_split[1].charAt(0), pedidos_split[2]);
                             i++;
                         }
                     }
@@ -146,7 +146,7 @@ public class Funciones {
                         i++;
                         while (!txt_split[i].equals("Rutas")) {
                             String[] pedidos_split = txt_split[i].split(",");
-                            listaPedidos.agregarFinal(pedidos_split[0].charAt(0), pedidos_split[1].charAt(0), pedidos_split[2].split("/"));
+                            listaPedidos.agregarFinal(pedidos_split[0].charAt(0), pedidos_split[1].charAt(0), pedidos_split[2]);
                             i++;
                         }
                     }
@@ -299,5 +299,7 @@ public class Funciones {
         }
 
     }
+    
+    
 
 }
