@@ -57,6 +57,8 @@ public class VentanaGeneral extends javax.swing.JFrame {
         mostrarGrafo = new javax.swing.JButton();
         rolUsuario = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        actualizarRepo = new javax.swing.JButton();
+        salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -72,7 +74,7 @@ public class VentanaGeneral extends javax.swing.JFrame {
                 cargarArchivoActionPerformed(evt);
             }
         });
-        jPanel1.add(cargarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 270, -1));
+        jPanel1.add(cargarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 270, -1));
 
         continuarArchivo.setText("Continuar con archivo predeterminado");
         continuarArchivo.addActionListener(new java.awt.event.ActionListener() {
@@ -80,10 +82,10 @@ public class VentanaGeneral extends javax.swing.JFrame {
                 continuarArchivoActionPerformed(evt);
             }
         });
-        jPanel1.add(continuarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 270, -1));
+        jPanel1.add(continuarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 270, -1));
 
         recorrerGrafo.setText("Recorrer grafo");
-        jPanel1.add(recorrerGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 270, -1));
+        jPanel1.add(recorrerGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 270, -1));
 
         mostrarGrafo.setText("Mostrar grafo");
         mostrarGrafo.addActionListener(new java.awt.event.ActionListener() {
@@ -91,7 +93,7 @@ public class VentanaGeneral extends javax.swing.JFrame {
                 mostrarGrafoActionPerformed(evt);
             }
         });
-        jPanel1.add(mostrarGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 270, -1));
+        jPanel1.add(mostrarGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 270, -1));
 
         rolUsuario.setText("Seleccionar rol de usuario");
         rolUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +101,7 @@ public class VentanaGeneral extends javax.swing.JFrame {
                 rolUsuarioActionPerformed(evt);
             }
         });
-        jPanel1.add(rolUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 270, -1));
+        jPanel1.add(rolUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 270, -1));
 
         jButton1.setText("Mostrar info listas (se borra cuando se entregue el final)");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +109,23 @@ public class VentanaGeneral extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 380, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 380, -1));
+
+        actualizarRepo.setText("Actualizar repositorio");
+        actualizarRepo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarRepoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(actualizarRepo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 270, -1));
+
+        salir.setText("Salir del programa");
+        salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 270, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 410));
 
@@ -168,13 +186,26 @@ public class VentanaGeneral extends javax.swing.JFrame {
         informacionListas += listas.getListaClientes().getInformacionLista();
         informacionListas += listas.getListaPedidos().getInformacionLista();
         informacionListas += listas.getListaRutas().getInformacionLista();
-        
+
         JOptionPane.showMessageDialog(null, informacionListas);
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void actualizarRepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarRepoActionPerformed
+        if (archivo) {
+            f.escribirTxt(listas);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe cargar un archivo primero para actualizar el repositorio.");
+        }
+    }//GEN-LAST:event_actualizarRepoActionPerformed
+
+    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        dispose();
+    }//GEN-LAST:event_salirActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton actualizarRepo;
     private javax.swing.JButton cargarArchivo;
     private javax.swing.JButton continuarArchivo;
     private javax.swing.JButton jButton1;
@@ -183,5 +214,6 @@ public class VentanaGeneral extends javax.swing.JFrame {
     private javax.swing.JButton mostrarGrafo;
     private javax.swing.JButton recorrerGrafo;
     private javax.swing.JButton rolUsuario;
+    private javax.swing.JButton salir;
     // End of variables declaration//GEN-END:variables
 }

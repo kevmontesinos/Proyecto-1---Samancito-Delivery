@@ -100,12 +100,9 @@ public class VentanaDriver extends javax.swing.JFrame {
 
     private void DijkstraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DijkstraActionPerformed
         String seleccionado = pedido.getSelectedItem().toString();
-        char origen = seleccionado.charAt(0);
-        char destino = seleccionado.charAt(6);
+        char dirRestaurante = seleccionado.charAt(6);
+        char dirCliente = seleccionado.charAt(0);
         
-        System.out.println(origen);
-        System.out.println(destino);
-
         matrizAdy = new MatrizAdyacencia(listas.getListaDirecciones().getTamano());
         String[] rutas = listas.getListaRutas().getArrayRutas();
         
@@ -116,7 +113,7 @@ public class VentanaDriver extends javax.swing.JFrame {
         int[][] matriz = matrizAdy.getMatriz();
 
         dk = new Dijkstra();
-        dk.Dijkstra(matriz, ld.getPosicionInt(Character.toString(origen)), ld, Character.toString(destino));
+        dk.Dijkstra(matriz, ld.getPosicionInt(Character.toString(dirCliente)), ld, Character.toString(dirRestaurante));
 
     }//GEN-LAST:event_DijkstraActionPerformed
 

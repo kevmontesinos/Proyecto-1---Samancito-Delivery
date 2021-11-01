@@ -187,7 +187,7 @@ public class Funciones {
             PrintWriter pw = new PrintWriter("test\\data.txt");
             pw.print(info);
             pw.close();
-            JOptionPane.showMessageDialog(null, "Guardado exitoso");
+            JOptionPane.showMessageDialog(null, "Se actualizó el repositorio correctamente.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al guardar");
         }

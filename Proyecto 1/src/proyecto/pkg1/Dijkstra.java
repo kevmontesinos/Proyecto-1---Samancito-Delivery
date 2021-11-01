@@ -15,7 +15,7 @@ public class Dijkstra {
 
     private static final int NO_PARENT = -1;
     ListaDirecciones ld;
-    String destino;
+    String restaurante;
     String caminoMasCorto;
 
     // Function that implements Dijkstra's
@@ -23,10 +23,10 @@ public class Dijkstra {
     // algorithm for a graph represented
     // using adjacency matrix
     // representation
-    public void Dijkstra(int[][] adjacencyMatrix, int startVertex, ListaDirecciones ld, String destino) {
+    public void Dijkstra(int[][] adjacencyMatrix, int startVertex, ListaDirecciones ld, String restaurante) {
         int nVertices = adjacencyMatrix[0].length; 
         this.ld = ld;
-        this.destino = destino;
+        this.restaurante = restaurante;
         this.caminoMasCorto = "El camino más corto es: \n";
         // shortestDistances[i] will hold the
         // shortest distance from src to i
@@ -103,7 +103,7 @@ public class Dijkstra {
         int nVertices = distances.length;
         for (int vertexIndex = 0; vertexIndex < nVertices; vertexIndex++) {
             if (vertexIndex != startVertex) {
-                if (ld.getValor(vertexIndex).equals(destino)) {
+                if (ld.getValor(vertexIndex).equals(restaurante)) {
                     printPath(vertexIndex, parents);
                 }
             }

@@ -60,7 +60,7 @@ public class ListaPedidos {
         String[] pedidos = new String[tamano];
         NodoPedido aux = primero;
         for (int i = 0; i < tamano; i++) {
-            pedidos[i] = aux.getDireccionCliente() + " ==> " + aux.getDireccionRestaurante() + "  " + aux.getPedido();
+            pedidos[i] = aux.getDireccionRestaurante() + " ==> " + aux.getDireccionCliente()+ "  " + aux.getPedido();
             aux = aux.getSiguiente();
         }
         return pedidos;
