@@ -52,23 +52,35 @@ public class ListaRutas {
             NodoRuta aux = primero;
 
             for (int i = 0; i < tamano; i++) {
-                info += aux.getOrigen()+ "," + aux.getDestino()+ "," + aux.getPeso()+ "\n";
+                info += aux.getOrigen() + "," + aux.getDestino() + "," + aux.getPeso() + "\n";
                 aux = aux.getSiguiente();
             }
         }
         return info;
     }
- 
-    public String getRutasGraphviz(){
+
+    public String getRutasGraphviz() {
         NodoRuta aux = primero;
         String info = "";
-        for (int i = 0; i < tamano; i++){
-            info += aux.getOrigen()+ " -> " + aux.getDestino()+ " " + "[label=\"" + aux.getPeso() + "\"];" + "\n";
-                aux = aux.getSiguiente();
+        for (int i = 0; i < tamano; i++) {
+            info += aux.getOrigen() + " -> " + aux.getDestino() + " " + "[label=\"" + aux.getPeso() + "\"];" + "\n";
+            aux = aux.getSiguiente();
         }
         return info;
     }
-    
+
+    public boolean existeRuta(String origen, String destino) {
+       
+        NodoRuta aux = primero;
+        for (int i = 0; i < tamano; i++) {
+            if ((aux.getOrigen() == origen.charAt(0)) && aux.getDestino() == destino.charAt(0)){
+                return true;
+            }
+            aux = aux.getSiguiente();
+        }
+        return false;
+    }
+
     public void imprimirLista() {
         String info = "";
         if (esVacio()) {

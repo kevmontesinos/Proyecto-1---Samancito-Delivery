@@ -227,7 +227,7 @@ public class Funciones {
 
         info += listaRutas.getRutasGraphviz();
         info += "}" + "\n";
-        
+
         try {
             PrintWriter pw = new PrintWriter("test\\grafo.txt");
             pw.print(info);
@@ -248,7 +248,7 @@ public class Funciones {
             String fileInputPath = "test\\grafo.txt";
             //path de salida del grafo, es decir el path de la imagen que vamos a crear con graphviz
             String fileOutputPath = "test\\grafoImagen.jpg";
-            
+
             //tipo de imagen de salida, en este caso es jpg
             String tParam = "-Tjpg";
 
@@ -273,6 +273,20 @@ public class Funciones {
             ex.printStackTrace();
         } finally {
         }
+    }
+
+    public boolean validaDireccionRest(String cadena) {
+        if (cadena.length() != 1){
+            return false;
+        }
+        for (int i = 0; i < cadena.length(); i++) {
+            char caracter = cadena.toUpperCase().charAt(i);
+            int valorASCII = (int) caracter;
+            if (valorASCII != 165 && (valorASCII < 65 || valorASCII > 90)) {
+                return false; 
+            }
+        }
+        return true;
     }
 
 }

@@ -71,7 +71,7 @@ public class VentanaGeneral extends javax.swing.JFrame {
                 cargarArchivoActionPerformed(evt);
             }
         });
-        jPanel1.add(cargarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 240, -1));
+        jPanel1.add(cargarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 270, -1));
 
         continuarArchivo.setText("Continuar con archivo predeterminado");
         continuarArchivo.addActionListener(new java.awt.event.ActionListener() {
@@ -79,10 +79,10 @@ public class VentanaGeneral extends javax.swing.JFrame {
                 continuarArchivoActionPerformed(evt);
             }
         });
-        jPanel1.add(continuarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 240, -1));
+        jPanel1.add(continuarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 270, -1));
 
         recorrerGrafo.setText("Recorrer grafo");
-        jPanel1.add(recorrerGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 240, -1));
+        jPanel1.add(recorrerGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 270, -1));
 
         mostrarGrafo.setText("Mostrar grafo");
         mostrarGrafo.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +90,7 @@ public class VentanaGeneral extends javax.swing.JFrame {
                 mostrarGrafoActionPerformed(evt);
             }
         });
-        jPanel1.add(mostrarGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 240, -1));
+        jPanel1.add(mostrarGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 270, -1));
 
         rolUsuario.setText("Seleccionar rol de usuario");
         rolUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +98,7 @@ public class VentanaGeneral extends javax.swing.JFrame {
                 rolUsuarioActionPerformed(evt);
             }
         });
-        jPanel1.add(rolUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 240, -1));
+        jPanel1.add(rolUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 270, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 410));
 
@@ -136,12 +136,12 @@ public class VentanaGeneral extends javax.swing.JFrame {
     private void mostrarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarGrafoActionPerformed
         if (archivo) {
             f.generarGrafoJpg(listas);
-            JOptionPane.showMessageDialog(null, "Espere");
-//            try {
-//                Thread.sleep(2000);
-//            } catch (InterruptedException ex) {
-//                Thread.currentThread().interrupt();
-//            }
+            
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
             new VentanaMostrarGrafo(listas).setVisible(true);
             dispose();
         } else {

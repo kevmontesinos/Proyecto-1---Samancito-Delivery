@@ -146,13 +146,13 @@ public class VentanaNuevoLocal extends javax.swing.JFrame {
 
     private void agregarLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarLocalActionPerformed
         try {
-            if (!nombre.getText().isBlank() && !direccion.getText().isBlank() && !menu.isBlank()) {
+            if (!nombre.getText().isBlank() && !direccion.getText().isBlank() && !menu.isBlank() && f.validaDireccionRest(direccion.getText())) {
                 String menu_str = menu.substring(0, menu.length()-1);
                 if (!entrada.getSelectedItem().toString().equals(salida.getSelectedItem().toString())) {
                     listas.getListaRestaurantes().agregarFinal(direccion.getText().charAt(0), nombre.getText(), menu_str.split("/"));
                     listas.getListaRutas().agregarFinal(entrada.getSelectedItem().toString().charAt(0), direccion.getText().charAt(0), Integer.parseInt(pesoEntrada.getValue().toString()));
                     listas.getListaRutas().agregarFinal(direccion.getText().charAt(0), salida.getSelectedItem().toString().charAt(0), Integer.parseInt(pesoSalida.getValue().toString()));
-                    JOptionPane.showMessageDialog(null, "El cliente fue agregado correctamente");
+                    JOptionPane.showMessageDialog(null, "El local fue agregado correctamente");
                     new VentanaCliente(listas).setVisible(true);
                     dispose();
 
@@ -163,13 +163,8 @@ public class VentanaNuevoLocal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No se pudo agregar el cliente, complete los campos correctamente.");
-        }
-        
-        JOptionPane.showMessageDialog(null, listas.getListaRestaurantes().getInformacionLista());
-        JOptionPane.showMessageDialog(null, listas.getListaClientes().getInformacionLista());
-        JOptionPane.showMessageDialog(null, listas.getListaPedidos().getInformacionLista());
-        JOptionPane.showMessageDialog(null, listas.getListaRutas().getInformacionLista());
+            JOptionPane.showMessageDialog(null, "No se pudo agregar el local, complete los campos correctamente.");
+        }       
     }//GEN-LAST:event_agregarLocalActionPerformed
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed

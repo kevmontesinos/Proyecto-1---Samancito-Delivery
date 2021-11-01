@@ -101,23 +101,24 @@ public class VentanaNuevoCamino extends javax.swing.JFrame {
         try {
 
             if (!origen.getSelectedItem().toString().equals(destino.getSelectedItem().toString())) {
-
-                listas.getListaRutas().agregarFinal(origen.getSelectedItem().toString().charAt(0), destino.getSelectedItem().toString().charAt(0), Integer.parseInt(distancia.getValue().toString()));
-                JOptionPane.showMessageDialog(null, "El camino fue agregado correctamente");
-                new VentanaAdmin(listas).setVisible(true);
-                dispose();
+                if (!listas.getListaRutas().existeRuta(origen.getSelectedItem().toString(), destino.getSelectedItem().toString())) {
+                    listas.getListaRutas().agregarFinal(origen.getSelectedItem().toString().charAt(0), destino.getSelectedItem().toString().charAt(0), Integer.parseInt(distancia.getValue().toString()));
+                    JOptionPane.showMessageDialog(null, "El camino fue agregado correctamente");
+                    new VentanaAdmin(listas).setVisible(true);
+                    dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, "El camino ya existe.");
+                }
 
             } else {
-                JOptionPane.showMessageDialog(null, "La dirección de entrada y salida no pueden coincidir.");
+                JOptionPane.showMessageDialog(null, "La dirección de entrada y salida no pueden coincidir. ");
             }
 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo agregar el camino.");
         }
-    
-    catch (Exception e){
-        JOptionPane.showMessageDialog(null, "No se pudo agregar el camino.");
-    }
 
-  
+
     }//GEN-LAST:event_agregarCaminoActionPerformed
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed

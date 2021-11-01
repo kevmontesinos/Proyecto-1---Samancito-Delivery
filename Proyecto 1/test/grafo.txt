@@ -33,5 +33,5 @@ D -> 6 [label="5"];
 6 -> C [label="6"];
 E -> 1 [label="1"];
 E -> A [label="1"];
-A -> E [label="4"];
+D -> A [label="1"];
 }
