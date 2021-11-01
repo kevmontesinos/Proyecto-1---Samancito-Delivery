@@ -276,17 +276,28 @@ public class Funciones {
     }
 
     public boolean validaDireccionRest(String cadena) {
-        if (cadena.length() != 1){
+        if (cadena.length() != 1) {
             return false;
         }
         for (int i = 0; i < cadena.length(); i++) {
             char caracter = cadena.toUpperCase().charAt(i);
             int valorASCII = (int) caracter;
             if (valorASCII != 165 && (valorASCII < 65 || valorASCII > 90)) {
-                return false; 
+                return false;
             }
         }
         return true;
+    }
+
+    public boolean validaDirecionCliente(String cadena) {
+
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
     }
 
 }

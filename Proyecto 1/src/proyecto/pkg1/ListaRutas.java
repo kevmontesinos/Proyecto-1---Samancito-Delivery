@@ -80,7 +80,7 @@ public class ListaRutas {
         }
         return false;
     }
-
+    
     public void imprimirLista() {
         String info = "";
         if (esVacio()) {

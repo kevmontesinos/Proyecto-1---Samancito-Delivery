@@ -153,6 +153,17 @@ public class ListaRestaurantes {
 
     }
 
+    public boolean existeDireccion(String direccion) {
+        NodoRestaurante aux = primero;
+        for (int i = 0; i < tamano; i++) {
+            if (aux.getDireccion()== direccion.charAt(0)) {
+                return true;
+            }
+            aux = aux.getSiguiente();
+        }
+        return false;
+    }
+
     public void imprimirLista() {
         String info = "";
         if (esVacio()) {

@@ -91,6 +91,7 @@ public class VentanaOtroPlato extends javax.swing.JFrame {
     private void agregarPlatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPlatoActionPerformed
         if (!plato.getText().isBlank()) {
             Enviar(plato.getText());
+            JOptionPane.showMessageDialog(null, "Plato agregado correctamente.");
         } else {
             JOptionPane.showMessageDialog(null, "No puede dejar vacío la casilla");
         }

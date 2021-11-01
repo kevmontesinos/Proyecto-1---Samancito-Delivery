@@ -58,38 +58,49 @@ public class ListaClientes {
         }
         return info;
     }
-    
-    public int[] getArrayClientes(){
+
+    public int[] getArrayClientes() {
         int[] clientes = new int[tamano];
         NodoCliente aux = primero;
-        for (int i = 0; i < tamano; i++){
+        for (int i = 0; i < tamano; i++) {
             clientes[i] = aux.getCedula();
             aux = aux.getSiguiente();
         }
         return clientes;
     }
-    
-    public NodoCliente getNodo(int cedula){
+
+    public NodoCliente getNodo(int cedula) {
         NodoCliente aux = primero;
-        for (int i = 0; i < tamano; i++){
-            if (aux.getCedula() == cedula){
+        for (int i = 0; i < tamano; i++) {
+            if (aux.getCedula() == cedula) {
                 return aux;
             }
             aux = aux.getSiguiente();
         }
         return null;
     }
-    
-    public char[] getDireccionesClientes(){
+
+    public char[] getDireccionesClientes() {
         char[] direcciones = new char[tamano];
         NodoCliente aux = primero;
-        for (int i =0; i< tamano; i++){
+        for (int i = 0; i < tamano; i++) {
             direcciones[i] = aux.getDireccion();
-            aux = aux.getSiguiente();            
+            aux = aux.getSiguiente();
         }
         return direcciones;
     }
-    
+
+    public boolean existeDireccion(String direccion) {
+        NodoCliente aux = primero;
+        for (int i = 0; i < tamano; i++) {
+            if (aux.getDireccion() == direccion.charAt(0)) {
+                return true;
+            }
+            aux = aux.getSiguiente();
+        }
+        return false;
+    }
+
     public void imprimirLista() {
         String info = "";
         if (esVacio()) {
