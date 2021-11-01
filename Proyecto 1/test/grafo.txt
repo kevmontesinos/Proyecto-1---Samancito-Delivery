@@ -1,0 +1,37 @@
+digraph G
+{
+rankdir=LR;
+A;
+B;
+C;
+D;
+E;
+1;
+2;
+3;
+4;
+5;
+6;
+7;
+A -> 1 [label="3"];
+A -> 2 [label="2"];
+1 -> C [label="2"];
+1 -> 5 [label="8"];
+2 -> E [label="2"];
+2 -> 4 [label="4"];
+C -> 5 [label="3"];
+4 -> 3 [label="2"];
+4 -> B [label="6"];
+5 -> B [label="3"];
+5 -> E [label="7"];
+B -> 6 [label="7"];
+3 -> 7 [label="1"];
+7 -> D [label="4"];
+D -> B [label="1"];
+D -> 6 [label="5"];
+6 -> 5 [label="5"];
+6 -> C [label="6"];
+E -> 1 [label="1"];
+E -> A [label="1"];
+A -> E [label="4"];
+}

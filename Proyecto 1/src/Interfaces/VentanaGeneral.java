@@ -31,6 +31,15 @@ public class VentanaGeneral extends javax.swing.JFrame {
 
     }
 
+    public VentanaGeneral(Listas listas) {
+        initComponents();
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        this.listas = listas;
+        f = new Funciones();
+        archivo = true;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -125,7 +134,19 @@ public class VentanaGeneral extends javax.swing.JFrame {
     }//GEN-LAST:event_continuarArchivoActionPerformed
 
     private void mostrarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarGrafoActionPerformed
-        // TODO add your handling code here:
+        if (archivo) {
+            f.generarGrafoJpg(listas);
+            JOptionPane.showMessageDialog(null, "Espere");
+//            try {
+//                Thread.sleep(2000);
+//            } catch (InterruptedException ex) {
+//                Thread.currentThread().interrupt();
+//            }
+            new VentanaMostrarGrafo(listas).setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe cargar un archivo primero para continuar");
+        }
     }//GEN-LAST:event_mostrarGrafoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

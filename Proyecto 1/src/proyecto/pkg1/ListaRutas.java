@@ -58,6 +58,16 @@ public class ListaRutas {
         }
         return info;
     }
+ 
+    public String getRutasGraphviz(){
+        NodoRuta aux = primero;
+        String info = "";
+        for (int i = 0; i < tamano; i++){
+            info += aux.getOrigen()+ " -> " + aux.getDestino()+ " " + "[label=\"" + aux.getPeso() + "\"];" + "\n";
+                aux = aux.getSiguiente();
+        }
+        return info;
+    }
     
     public void imprimirLista() {
         String info = "";
