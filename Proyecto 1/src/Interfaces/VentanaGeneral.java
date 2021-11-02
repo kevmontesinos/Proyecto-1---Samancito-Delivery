@@ -6,8 +6,11 @@
 package Interfaces;
 
 import javax.swing.JOptionPane;
+import proyecto.pkg1.DFS;
 import proyecto.pkg1.Funciones;
+import proyecto.pkg1.ListaDirecciones;
 import proyecto.pkg1.Listas;
+import proyecto.pkg1.MatrizAdyacencia;
 
 /**
  *
@@ -18,6 +21,9 @@ public class VentanaGeneral extends javax.swing.JFrame {
     Funciones f;
     Listas listas;
     boolean archivo;
+    ListaDirecciones ld;
+    MatrizAdyacencia ad;
+    DFS recorrido;
 
     /**
      * Creates new form VentanaGeneral
@@ -38,6 +44,7 @@ public class VentanaGeneral extends javax.swing.JFrame {
         this.listas = listas;
         f = new Funciones();
         archivo = true;
+        this.ld = listas.getListaDirecciones();
     }
 
     /**
@@ -85,6 +92,11 @@ public class VentanaGeneral extends javax.swing.JFrame {
         jPanel1.add(continuarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 270, -1));
 
         recorrerGrafo.setText("Recorrer grafo");
+        recorrerGrafo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recorrerGrafoActionPerformed(evt);
+            }
+        });
         jPanel1.add(recorrerGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 270, -1));
 
         mostrarGrafo.setText("Mostrar grafo");
@@ -203,6 +215,25 @@ public class VentanaGeneral extends javax.swing.JFrame {
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
         dispose();
     }//GEN-LAST:event_salirActionPerformed
+
+    private void recorrerGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recorrerGrafoActionPerformed
+        ad = new MatrizAdyacencia(ld.getTamano());
+        String[] rutas = listas.getListaRutas().getArrayRutas();
+        for (int i = 0; i < rutas.length; i++) {
+
+            ad.agregarVert(ld.getPosicionInt(rutas[i].split(",")[0]), ld.getPosicionInt(rutas[i].split(",")[1]));
+        }
+        int[][] matriz = ad.getMatriz();
+        recorrido = new DFS();
+        boolean[] visited = new boolean[matriz.length];
+        int count = 0;
+        for (int i = 0; i < matriz.length; i++) {
+            if (!visited[i]) {
+                recorrido.dfs(i, matriz, visited, ld);
+                count++;
+            }
+        }
+    }//GEN-LAST:event_recorrerGrafoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actualizarRepo;

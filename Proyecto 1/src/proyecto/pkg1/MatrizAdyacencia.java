@@ -23,10 +23,28 @@ public class MatrizAdyacencia {
         this.valores = new int[numNodos];
     }
 
+    public void agregarVert(int origen, int destino) {
+        matriz[origen][destino] = 1;
+    }
+
     public void agregarVert(int origen, int destino, int peso) {
 
         matriz[origen][destino] = peso;
 
+    }
+
+    public int[][] getMatrizSP() {
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz.length; j++) {
+                if (i == j) {
+                    matriz[i][j] = 0;
+                } else if (matriz[i][j] == 0) {
+                    matriz[i][j] = 0;
+                }
+
+            }
+        }
+        return matriz;
     }
 
     public int[][] getMatriz() {
