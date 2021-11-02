@@ -13,9 +13,9 @@ import javax.swing.JOptionPane;
  */
 public class ListaRestaurantes {
 
-    NodoRestaurante primero;
-    NodoRestaurante ultimo;
-    int tamano;
+    private NodoRestaurante primero;
+    private NodoRestaurante ultimo;
+    private int tamano;
 
     public ListaRestaurantes() {
         this.primero = null;
@@ -24,25 +24,25 @@ public class ListaRestaurantes {
     }
 
     public void vaciar() {
-        this.primero = null;
-        this.ultimo = null;
-        this.tamano = 0;
+        this.setPrimero(null);
+        this.setUltimo(null);
+        this.setTamano(0);
     }
 
     public boolean esVacio() {
-        return primero == null;
+        return getPrimero() == null;
     }
 
     public void agregarFinal(char direccion, String nombre, String[] menu) {
         NodoRestaurante nuevo = new NodoRestaurante(direccion, nombre, menu);
         if (esVacio()) {
-            primero = nuevo;
-            ultimo = nuevo;
+            setPrimero(nuevo);
+            setUltimo(nuevo);
         } else {
-            ultimo.setSiguiente(nuevo);
-            ultimo = nuevo;
+            getUltimo().setSiguiente(nuevo);
+            setUltimo(nuevo);
         }
-        tamano++;
+        setTamano(getTamano() + 1);
     }
 
     public String getMenu(NodoRestaurante nodo) {
@@ -61,9 +61,9 @@ public class ListaRestaurantes {
         String info = "Restaurantes\n";
         if (!esVacio()) {
 
-            NodoRestaurante aux = primero;
+            NodoRestaurante aux = getPrimero();
 
-            for (int i = 0; i < tamano; i++) {
+            for (int i = 0; i < getTamano(); i++) {
                 info += aux.getDireccion() + "," + aux.getNombre() + "," + getMenu(aux) + "\n";
                 aux = aux.getSiguiente();
             }
@@ -72,9 +72,9 @@ public class ListaRestaurantes {
     }
 
     public String[] getArrayRest() {
-        String[] restaurantes = new String[tamano];
-        NodoRestaurante aux = primero;
-        for (int i = 0; i < tamano; i++) {
+        String[] restaurantes = new String[getTamano()];
+        NodoRestaurante aux = getPrimero();
+        for (int i = 0; i < getTamano(); i++) {
             restaurantes[i] = aux.getNombre();
             aux = aux.getSiguiente();
         }
@@ -82,8 +82,8 @@ public class ListaRestaurantes {
     }
 
     public String[] buscarRest(String restaurante) {
-        NodoRestaurante aux = primero;
-        for (int i = 0; i < tamano; i++) {
+        NodoRestaurante aux = getPrimero();
+        for (int i = 0; i < getTamano(); i++) {
             if (aux.getNombre().equals(restaurante)) {
                 return aux.getMenu();
             }
@@ -94,8 +94,8 @@ public class ListaRestaurantes {
     }
 
     public NodoRestaurante getNodo(String restaurante) {
-        NodoRestaurante aux = primero;
-        for (int i = 0; i < tamano; i++) {
+        NodoRestaurante aux = getPrimero();
+        for (int i = 0; i < getTamano(); i++) {
             if (aux.getNombre().equals(restaurante)) {
                 return aux;
             }
@@ -105,9 +105,9 @@ public class ListaRestaurantes {
     }
 
     public char[] getDireccionesRestaurantes() {
-        char[] direcciones = new char[tamano];
-        NodoRestaurante aux = primero;
-        for (int i = 0; i < tamano; i++) {
+        char[] direcciones = new char[getTamano()];
+        NodoRestaurante aux = getPrimero();
+        for (int i = 0; i < getTamano(); i++) {
             direcciones[i] = aux.getDireccion();
             aux = aux.getSiguiente();
         }
@@ -115,9 +115,9 @@ public class ListaRestaurantes {
     }
 
     public void setMenus(String restaurante, String agregado) {
-        NodoRestaurante aux = primero;
+        NodoRestaurante aux = getPrimero();
         String menuActual = "";
-        for (int i = 0; i < tamano; i++) {
+        for (int i = 0; i < getTamano(); i++) {
             if (restaurante.equals(aux.getNombre())) {
                 for (int j = 0; j < aux.getMenu().length; j++) {
                     menuActual += aux.getMenu()[j] + "/";
@@ -134,9 +134,9 @@ public class ListaRestaurantes {
     }
 
     public void EliminarPlato(String restaurante, String plato) {
-        NodoRestaurante aux = primero;
+        NodoRestaurante aux = getPrimero();
         String menuActual = "";
-        for (int i = 0; i < tamano; i++) {
+        for (int i = 0; i < getTamano(); i++) {
             if (restaurante.equals(aux.getNombre())) {
                 for (int j = 0; j < aux.getMenu().length; j++) {
                     menuActual += aux.getMenu()[j] + "/";
@@ -154,8 +154,8 @@ public class ListaRestaurantes {
     }
 
     public boolean existeDireccion(String direccion) {
-        NodoRestaurante aux = primero;
-        for (int i = 0; i < tamano; i++) {
+        NodoRestaurante aux = getPrimero();
+        for (int i = 0; i < getTamano(); i++) {
             if (aux.getDireccion()== direccion.charAt(0)) {
                 return true;
             }
@@ -170,14 +170,38 @@ public class ListaRestaurantes {
             System.out.println("La lista está vacía");
 
         } else {
-            NodoRestaurante aux = primero;
+            NodoRestaurante aux = getPrimero();
 
-            for (int i = 0; i < tamano; i++) {
+            for (int i = 0; i < getTamano(); i++) {
                 info += "Direccion: " + aux.getDireccion() + ", " + "Nombre: " + aux.getNombre() + "\n";
                 aux = aux.getSiguiente();
             }
         }
         JOptionPane.showMessageDialog(null, info);
+    }
+
+    public NodoRestaurante getPrimero() {
+        return primero;
+    }
+
+    public void setPrimero(NodoRestaurante primero) {
+        this.primero = primero;
+    }
+
+    public NodoRestaurante getUltimo() {
+        return ultimo;
+    }
+
+    public void setUltimo(NodoRestaurante ultimo) {
+        this.ultimo = ultimo;
+    }
+
+    public int getTamano() {
+        return tamano;
+    }
+
+    public void setTamano(int tamano) {
+        this.tamano = tamano;
     }
 
 }

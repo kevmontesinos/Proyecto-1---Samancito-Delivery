@@ -13,9 +13,9 @@ import javax.swing.JOptionPane;
  */
 public class ListaPedidos {
 
-    NodoPedido primero;
-    NodoPedido ultimo;
-    int tamano;
+    private NodoPedido primero;
+    private NodoPedido ultimo;
+    private int tamano;
 
     public ListaPedidos() {
         this.primero = null;
@@ -24,25 +24,25 @@ public class ListaPedidos {
     }
 
     public void vaciar() {
-        this.primero = null;
-        this.ultimo = null;
-        this.tamano = 0;
+        this.setPrimero(null);
+        this.setUltimo(null);
+        this.setTamano(0);
     }
 
     public boolean esVacio() {
-        return primero == null;
+        return getPrimero() == null;
     }
 
     public void agregarFinal(char direccionCliente, char direccionRestaurante, String pedido) {
         NodoPedido nuevo = new NodoPedido(direccionCliente, direccionRestaurante, pedido);
         if (esVacio()) {
-            primero = nuevo;
-            ultimo = nuevo;
+            setPrimero(nuevo);
+            setUltimo(nuevo);
         } else {
-            ultimo.setSiguiente(nuevo);
-            ultimo = nuevo;
+            getUltimo().setSiguiente(nuevo);
+            setUltimo(nuevo);
         }
-        tamano++;
+        setTamano(getTamano() + 1);
     }
 
 //    public String getPedidos(NodoPedido nodo) {
@@ -57,9 +57,9 @@ public class ListaPedidos {
 //        return info;
 //    }
     public String[] getArrayPedidos() {
-        String[] pedidos = new String[tamano];
-        NodoPedido aux = primero;
-        for (int i = 0; i < tamano; i++) {
+        String[] pedidos = new String[getTamano()];
+        NodoPedido aux = getPrimero();
+        for (int i = 0; i < getTamano(); i++) {
             pedidos[i] = aux.getDireccionRestaurante() + " ==> " + aux.getDireccionCliente()+ "  " + aux.getPedido();
             aux = aux.getSiguiente();
         }
@@ -70,9 +70,9 @@ public class ListaPedidos {
         String info = "Pedidos\n";
         if (!esVacio()) {
 
-            NodoPedido aux = primero;
+            NodoPedido aux = getPrimero();
 
-            for (int i = 0; i < tamano; i++) {
+            for (int i = 0; i < getTamano(); i++) {
                 info += aux.getDireccionCliente() + "," + aux.getDireccionRestaurante() + "," + aux.getPedido() + "\n";
                 aux = aux.getSiguiente();
             }
@@ -86,14 +86,38 @@ public class ListaPedidos {
             System.out.println("La lista está vacía");
 
         } else {
-            NodoPedido aux = primero;
+            NodoPedido aux = getPrimero();
 
-            for (int i = 0; i < tamano; i++) {
+            for (int i = 0; i < getTamano(); i++) {
                 info += "Direccion cliente: " + aux.getDireccionCliente() + ", " + "Direccion Rest : " + aux.getDireccionRestaurante() + "\n";
                 aux = aux.getSiguiente();
             }
         }
         JOptionPane.showMessageDialog(null, info);
+    }
+
+    public NodoPedido getPrimero() {
+        return primero;
+    }
+
+    public void setPrimero(NodoPedido primero) {
+        this.primero = primero;
+    }
+
+    public NodoPedido getUltimo() {
+        return ultimo;
+    }
+
+    public void setUltimo(NodoPedido ultimo) {
+        this.ultimo = ultimo;
+    }
+
+    public int getTamano() {
+        return tamano;
+    }
+
+    public void setTamano(int tamano) {
+        this.tamano = tamano;
     }
 
 }
