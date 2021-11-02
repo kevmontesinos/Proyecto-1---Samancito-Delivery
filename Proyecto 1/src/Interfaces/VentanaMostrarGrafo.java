@@ -52,7 +52,7 @@ public class VentanaMostrarGrafo extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 1130, 490));
+        jPanel1.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 1130, 600));
 
         jButton1.setText("Regresar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -60,7 +60,7 @@ public class VentanaMostrarGrafo extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 650, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 670, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 1420, 730));
 

@@ -13,9 +13,9 @@ import javax.swing.JOptionPane;
  */
 public class ListaRutas {
 
-    NodoRuta primero;
-    NodoRuta ultimo;
-    int tamano;
+    private NodoRuta primero;
+    private NodoRuta ultimo;
+    private int tamano;
 
     public ListaRutas() {
         this.primero = null;
@@ -24,34 +24,34 @@ public class ListaRutas {
     }
 
     public void vaciar() {
-        this.primero = null;
-        this.ultimo = null;
-        this.tamano = 0;
+        this.setPrimero(null);
+        this.setUltimo(null);
+        this.setTamano(0);
     }
 
     public boolean esVacio() {
-        return primero == null;
+        return getPrimero() == null;
     }
 
     public void agregarFinal(char origen, char destino, int peso) {
         NodoRuta nuevo = new NodoRuta(origen, destino, peso);
         if (esVacio()) {
-            primero = nuevo;
-            ultimo = nuevo;
+            setPrimero(nuevo);
+            setUltimo(nuevo);
         } else {
-            ultimo.setSiguiente(nuevo);
-            ultimo = nuevo;
+            getUltimo().setSiguiente(nuevo);
+            setUltimo(nuevo);
         }
-        tamano++;
+        setTamano(getTamano() + 1);
     }
 
     public String getInformacionLista() {
         String info = "Rutas\n";
         if (!esVacio()) {
 
-            NodoRuta aux = primero;
+            NodoRuta aux = getPrimero();
 
-            for (int i = 0; i < tamano; i++) {
+            for (int i = 0; i < getTamano(); i++) {
                 info += aux.getOrigen() + "," + aux.getDestino() + "," + aux.getPeso() + "\n";
                 aux = aux.getSiguiente();
             }
@@ -60,9 +60,9 @@ public class ListaRutas {
     }
 
     public String getRutasGraphviz() {
-        NodoRuta aux = primero;
+        NodoRuta aux = getPrimero();
         String info = "";
-        for (int i = 0; i < tamano; i++) {
+        for (int i = 0; i < getTamano(); i++) {
             info += aux.getOrigen() + " -> " + aux.getDestino() + " " + "[label=\"" + aux.getPeso() + "\"];" + "\n";
             aux = aux.getSiguiente();
         }
@@ -71,8 +71,8 @@ public class ListaRutas {
 
     public boolean existeRuta(String origen, String destino) {
        
-        NodoRuta aux = primero;
-        for (int i = 0; i < tamano; i++) {
+        NodoRuta aux = getPrimero();
+        for (int i = 0; i < getTamano(); i++) {
             if ((aux.getOrigen() == origen.charAt(0)) && aux.getDestino() == destino.charAt(0)){
                 return true;
             }
@@ -82,9 +82,9 @@ public class ListaRutas {
     }
     
     public String[] getArrayRutas(){
-        NodoRuta aux = primero;
-        String[] rutas = new String[tamano];
-        for (int i=0; i < tamano; i++){
+        NodoRuta aux = getPrimero();
+        String[] rutas = new String[getTamano()];
+        for (int i=0; i < getTamano(); i++){
             rutas[i] = aux.getOrigen() + "," + aux.getDestino() + "," + aux.getPeso();
             aux = aux.getSiguiente();
         }
@@ -96,14 +96,38 @@ public class ListaRutas {
             System.out.println("La lista está vacía");
 
         } else {
-            NodoRuta aux = primero;
+            NodoRuta aux = getPrimero();
 
-            for (int i = 0; i < tamano; i++) {
+            for (int i = 0; i < getTamano(); i++) {
                 info += "Origen: " + aux.getOrigen() + ", " + "Destino: " + aux.getDestino() + ", " + "Peso: " + aux.getPeso() + "\n";
                 aux = aux.getSiguiente();
             }
         }
         JOptionPane.showMessageDialog(null, info);
+    }
+
+    public NodoRuta getPrimero() {
+        return primero;
+    }
+
+    public void setPrimero(NodoRuta primero) {
+        this.primero = primero;
+    }
+
+    public NodoRuta getUltimo() {
+        return ultimo;
+    }
+
+    public void setUltimo(NodoRuta ultimo) {
+        this.ultimo = ultimo;
+    }
+
+    public int getTamano() {
+        return tamano;
+    }
+
+    public void setTamano(int tamano) {
+        this.tamano = tamano;
     }
 
 }

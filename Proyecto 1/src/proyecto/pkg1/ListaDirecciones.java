@@ -11,9 +11,9 @@ package proyecto.pkg1;
  */
 public class ListaDirecciones {
 
-    NodoDireccion primero;
-    NodoDireccion ultimo;
-    int tamano;
+    private NodoDireccion primero;
+    private NodoDireccion ultimo;
+    private int tamano;
 
     public ListaDirecciones() {
         this.primero = null;
@@ -22,13 +22,13 @@ public class ListaDirecciones {
     }
 
     public void vaciar() {
-        this.primero = null;
-        this.ultimo = null;
-        this.tamano = 0;
+        this.setPrimero(null);
+        this.setUltimo(null);
+        this.setTamano(0);
     }
 
     public boolean esVacio() {
-        return primero == null;
+        return getPrimero() == null;
     }
     
     public int getTamano(){
@@ -38,18 +38,18 @@ public class ListaDirecciones {
     public void agregarFinal(String elemento) {
         NodoDireccion nuevo = new NodoDireccion(elemento);
         if (esVacio()) {
-            primero = nuevo;
-            ultimo = nuevo;
+            setPrimero(nuevo);
+            setUltimo(nuevo);
         } else {
-            ultimo.setSiguiente(nuevo);
-            ultimo = nuevo;
+            getUltimo().setSiguiente(nuevo);
+            setUltimo(nuevo);
         }
-        tamano++;
+        setTamano(getTamano() + 1);
     }
 
     public int getPosicionInt(String valor) {
         if (!esVacio()) {
-            NodoDireccion aux = primero;
+            NodoDireccion aux = getPrimero();
             int cont = 0; //si se cuenta como el primer elemento el numero 1
 
             while (aux != null) {
@@ -69,9 +69,9 @@ public class ListaDirecciones {
     public String getValor(int posicion) {
 
         if (!esVacio()) {
-            NodoDireccion aux = primero;
+            NodoDireccion aux = getPrimero();
 
-            for (int i = 0; i <= tamano; i++) {
+            for (int i = 0; i <= getTamano(); i++) {
                 if (i == posicion) {
                     return aux.getElemento();
                 }
@@ -89,13 +89,33 @@ public class ListaDirecciones {
             System.out.println("La lista está vacía");
 
         } else {
-            NodoDireccion aux = primero;
-            for (int i = 0; i < tamano; i++) {
+            NodoDireccion aux = getPrimero();
+            for (int i = 0; i < getTamano(); i++) {
                 System.out.print(aux.getElemento() + " ");
                 aux = aux.getSiguiente();
             }
         }
         System.out.println("");
+    }
+
+    public NodoDireccion getPrimero() {
+        return primero;
+    }
+
+    public void setPrimero(NodoDireccion primero) {
+        this.primero = primero;
+    }
+
+    public NodoDireccion getUltimo() {
+        return ultimo;
+    }
+
+    public void setUltimo(NodoDireccion ultimo) {
+        this.ultimo = ultimo;
+    }
+
+    public void setTamano(int tamano) {
+        this.tamano = tamano;
     }
 
 }

@@ -13,9 +13,9 @@ import javax.swing.JOptionPane;
  */
 public class ListaClientes {
 
-    NodoCliente primero;
-    NodoCliente ultimo;
-    int tamano;
+    private NodoCliente primero;
+    private NodoCliente ultimo;
+    private int tamano;
 
     public ListaClientes() {
         this.primero = null;
@@ -24,34 +24,34 @@ public class ListaClientes {
     }
 
     public void vaciar() {
-        this.primero = null;
-        this.ultimo = null;
-        this.tamano = 0;
+        this.setPrimero(null);
+        this.setUltimo(null);
+        this.setTamano(0);
     }
 
     public boolean esVacio() {
-        return primero == null;
+        return getPrimero() == null;
     }
 
     public void agregarFinal(char direccion, String nombre, String apellido, int cedula) {
         NodoCliente nuevo = new NodoCliente(direccion, nombre, apellido, cedula);
         if (esVacio()) {
-            primero = nuevo;
-            ultimo = nuevo;
+            setPrimero(nuevo);
+            setUltimo(nuevo);
         } else {
-            ultimo.setSiguiente(nuevo);
-            ultimo = nuevo;
+            getUltimo().setSiguiente(nuevo);
+            setUltimo(nuevo);
         }
-        tamano++;
+        setTamano(getTamano() + 1);
     }
 
     public String getInformacionLista() {
         String info = "Clientes\n";
         if (!esVacio()) {
 
-            NodoCliente aux = primero;
+            NodoCliente aux = getPrimero();
 
-            for (int i = 0; i < tamano; i++) {
+            for (int i = 0; i < getTamano(); i++) {
                 info += aux.getDireccion() + "," + aux.getNombre() + "," + aux.getApellido() + "," + aux.getCedula() + "\n";
                 aux = aux.getSiguiente();
             }
@@ -60,9 +60,9 @@ public class ListaClientes {
     }
 
     public int[] getArrayClientes() {
-        int[] clientes = new int[tamano];
-        NodoCliente aux = primero;
-        for (int i = 0; i < tamano; i++) {
+        int[] clientes = new int[getTamano()];
+        NodoCliente aux = getPrimero();
+        for (int i = 0; i < getTamano(); i++) {
             clientes[i] = aux.getCedula();
             aux = aux.getSiguiente();
         }
@@ -70,8 +70,8 @@ public class ListaClientes {
     }
 
     public NodoCliente getNodo(int cedula) {
-        NodoCliente aux = primero;
-        for (int i = 0; i < tamano; i++) {
+        NodoCliente aux = getPrimero();
+        for (int i = 0; i < getTamano(); i++) {
             if (aux.getCedula() == cedula) {
                 return aux;
             }
@@ -81,9 +81,9 @@ public class ListaClientes {
     }
 
     public char[] getDireccionesClientes() {
-        char[] direcciones = new char[tamano];
-        NodoCliente aux = primero;
-        for (int i = 0; i < tamano; i++) {
+        char[] direcciones = new char[getTamano()];
+        NodoCliente aux = getPrimero();
+        for (int i = 0; i < getTamano(); i++) {
             direcciones[i] = aux.getDireccion();
             aux = aux.getSiguiente();
         }
@@ -91,8 +91,8 @@ public class ListaClientes {
     }
 
     public boolean existeDireccion(String direccion) {
-        NodoCliente aux = primero;
-        for (int i = 0; i < tamano; i++) {
+        NodoCliente aux = getPrimero();
+        for (int i = 0; i < getTamano(); i++) {
             if (aux.getDireccion() == direccion.charAt(0)) {
                 return true;
             }
@@ -107,14 +107,38 @@ public class ListaClientes {
             System.out.println("La lista está vacía");
 
         } else {
-            NodoCliente aux = primero;
+            NodoCliente aux = getPrimero();
 
-            for (int i = 0; i < tamano; i++) {
+            for (int i = 0; i < getTamano(); i++) {
                 info += "Direccion: " + aux.getDireccion() + ", " + "Nombre: " + aux.getNombre() + "\n";
                 aux = aux.getSiguiente();
             }
         }
         JOptionPane.showMessageDialog(null, info);
+    }
+
+    public NodoCliente getPrimero() {
+        return primero;
+    }
+
+    public void setPrimero(NodoCliente primero) {
+        this.primero = primero;
+    }
+
+    public NodoCliente getUltimo() {
+        return ultimo;
+    }
+
+    public void setUltimo(NodoCliente ultimo) {
+        this.ultimo = ultimo;
+    }
+
+    public int getTamano() {
+        return tamano;
+    }
+
+    public void setTamano(int tamano) {
+        this.tamano = tamano;
     }
 
 }
