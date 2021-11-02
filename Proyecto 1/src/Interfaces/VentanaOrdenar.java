@@ -25,10 +25,10 @@ public class VentanaOrdenar extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.listas = listas;
-        
+
         int[] cedulas = listas.getListaClientes().getArrayClientes();
-        
-        for(int i = 0; i < cedulas.length; i++){
+
+        for (int i = 0; i < cedulas.length; i++) {
             cedula.addItem(Integer.toString(cedulas[i]));
         }
 
@@ -121,7 +121,7 @@ public class VentanaOrdenar extends javax.swing.JFrame {
     private void restauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restauranteActionPerformed
 
         String[] menu = listas.getListaRestaurantes().buscarRest(String.valueOf(restaurante.getSelectedItem()));
-        
+
         try {
             plato.removeAllItems();
             for (int i = 0; i < menu.length; i++) {
@@ -139,16 +139,19 @@ public class VentanaOrdenar extends javax.swing.JFrame {
     }//GEN-LAST:event_platoActionPerformed
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
-        
-        char direccionCliente = listas.getListaClientes().getNodo(Integer.valueOf(String.valueOf(cedula.getSelectedItem()))).getDireccion();
-        char direccionRestaurante = listas.getListaRestaurantes().getNodo(String.valueOf(restaurante.getSelectedItem())).getDireccion();
-        
-        String pedido = numero.getValue().toString() + "-" + plato.getSelectedItem();
-        
-        listas.getListaPedidos().agregarFinal(direccionCliente, direccionRestaurante, pedido);
-        
-        
-        JOptionPane.showMessageDialog(null, "Su pedido fue agregado correctamente");
+        try {
+            char direccionCliente = listas.getListaClientes().getNodo(Integer.valueOf(String.valueOf(cedula.getSelectedItem()))).getDireccion();
+            char direccionRestaurante = listas.getListaRestaurantes().getNodo(String.valueOf(restaurante.getSelectedItem())).getDireccion();
+
+            String pedido = numero.getValue().toString() + "-" + plato.getSelectedItem();
+
+            listas.getListaPedidos().agregarFinal(direccionCliente, direccionRestaurante, pedido);
+
+            JOptionPane.showMessageDialog(null, "Su pedido fue agregado correctamente");
+            new VentanaCliente(listas).setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, listas);
+        }
     }//GEN-LAST:event_enviarActionPerformed
 
 

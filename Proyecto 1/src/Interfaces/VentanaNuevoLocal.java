@@ -150,10 +150,10 @@ public class VentanaNuevoLocal extends javax.swing.JFrame {
                 if (!entrada.getSelectedItem().toString().equals(salida.getSelectedItem().toString())) {
                     if (!listas.getListaRestaurantes().existeDireccion(direccion.getText())) {
                         listas.getListaRestaurantes().agregarFinal(direccion.getText().charAt(0), nombre.getText(), menu_str.split("/"));
-                        listas.getListaRutas().agregarFinal(entrada.getSelectedItem().toString().charAt(0), direccion.getText().charAt(0), Integer.parseInt(pesoEntrada.getValue().toString()));
+                        listas.getListaRutas().agregarFinal(entrada.getSelectedItem().toString().charAt(0), direccion.getText().toUpperCase().charAt(0), Integer.parseInt(pesoEntrada.getValue().toString()));
                         listas.getListaRutas().agregarFinal(direccion.getText().charAt(0), salida.getSelectedItem().toString().charAt(0), Integer.parseInt(pesoSalida.getValue().toString()));
                         JOptionPane.showMessageDialog(null, "El local fue agregado correctamente");
-                        new VentanaCliente(listas).setVisible(true);
+                        new VentanaAdmin(listas).setVisible(true);
                         dispose();
 
                     }else{

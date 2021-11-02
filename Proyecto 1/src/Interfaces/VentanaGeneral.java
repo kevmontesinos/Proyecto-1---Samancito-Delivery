@@ -22,7 +22,7 @@ public class VentanaGeneral extends javax.swing.JFrame {
     Listas listas;
     boolean archivo;
     ListaDirecciones ld;
-    MatrizAdyacencia ad;
+    MatrizAdyacencia matrizAdy;
     DFS recorrido;
 
     /**
@@ -63,7 +63,6 @@ public class VentanaGeneral extends javax.swing.JFrame {
         recorrerGrafo = new javax.swing.JButton();
         mostrarGrafo = new javax.swing.JButton();
         rolUsuario = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         actualizarRepo = new javax.swing.JButton();
         salir = new javax.swing.JButton();
 
@@ -115,14 +114,6 @@ public class VentanaGeneral extends javax.swing.JFrame {
         });
         jPanel1.add(rolUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 270, -1));
 
-        jButton1.setText("Mostrar info listas (se borra cuando se entregue el final)");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 380, -1));
-
         actualizarRepo.setText("Actualizar repositorio");
         actualizarRepo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,6 +138,10 @@ public class VentanaGeneral extends javax.swing.JFrame {
     private void cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarArchivoActionPerformed
         listas = f.leerTxtCargado();
         if (!listas.getListaClientes().esVacio() && !listas.getListaRestaurantes().esVacio() && !listas.getListaPedidos().esVacio() && !listas.getListaRutas().esVacio()) {
+            char[] direcciones = f.getDirecciones(listas);
+            for (int i = 0; i < direcciones.length; i++) {
+                listas.getListaDirecciones().agregarFinal(Character.toString(direcciones[i]));
+            }
             archivo = true;
         } else {
             archivo = false;
@@ -169,6 +164,7 @@ public class VentanaGeneral extends javax.swing.JFrame {
             for (int i = 0; i < direcciones.length; i++) {
                 listas.getListaDirecciones().agregarFinal(Character.toString(direcciones[i]));
             }
+            listas.getListaDirecciones().imprimirLista();
             archivo = true;
         } else {
             archivo = false;
@@ -192,18 +188,6 @@ public class VentanaGeneral extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mostrarGrafoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String informacionListas = "";
-        informacionListas += listas.getListaRestaurantes().getInformacionLista();
-        informacionListas += listas.getListaClientes().getInformacionLista();
-        informacionListas += listas.getListaPedidos().getInformacionLista();
-        informacionListas += listas.getListaRutas().getInformacionLista();
-
-        JOptionPane.showMessageDialog(null, informacionListas);
-
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void actualizarRepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarRepoActionPerformed
         if (archivo) {
             f.escribirTxt(listas);
@@ -217,21 +201,11 @@ public class VentanaGeneral extends javax.swing.JFrame {
     }//GEN-LAST:event_salirActionPerformed
 
     private void recorrerGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recorrerGrafoActionPerformed
-        ad = new MatrizAdyacencia(ld.getTamano());
-        String[] rutas = listas.getListaRutas().getArrayRutas();
-        for (int i = 0; i < rutas.length; i++) {
-
-            ad.agregarVert(ld.getPosicionInt(rutas[i].split(",")[0]), ld.getPosicionInt(rutas[i].split(",")[1]));
-        }
-        int[][] matriz = ad.getMatriz();
-        recorrido = new DFS();
-        boolean[] visited = new boolean[matriz.length];
-        int count = 0;
-        for (int i = 0; i < matriz.length; i++) {
-            if (!visited[i]) {
-                recorrido.dfs(i, matriz, visited, ld);
-                count++;
-            }
+        if (archivo) {
+            new VentanaRecorrido(listas).setVisible(true);
+            dispose();
+        } else{
+            JOptionPane.showMessageDialog(null, "Debe cargar un archivo primero para actualizar el repositorio.");
         }
     }//GEN-LAST:event_recorrerGrafoActionPerformed
 
@@ -239,7 +213,6 @@ public class VentanaGeneral extends javax.swing.JFrame {
     private javax.swing.JButton actualizarRepo;
     private javax.swing.JButton cargarArchivo;
     private javax.swing.JButton continuarArchivo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton mostrarGrafo;
