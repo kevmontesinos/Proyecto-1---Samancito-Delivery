@@ -1,0 +1,18 @@
+Para la visualizacion del grafo se utilizó Graphviz
+
+Para instalarlo EN WINDOWS 64 Bits:
+
+Descargar Graphviz desde https://graphviz.org/download/
+Descargar el archivo .exe graphviz-2.49.3 (64-bit) EXE installer [sha256]
+Abrir el archivo y darle continuar hasta instalarlo
+Configurar la variable de entorno siguiendo los pasos del siguiente video:
+https://www.youtube.com/watch?v=qMtJSWlWZlI&t=83s (min. 1:50)
+
+Ejecutar el proyecto
+Nota: desde el programa se ejecuta un archivo dot.exe
+Dependerá de la ruta donde se encuentre el programa en nuestro caso, se encontraba en
+C:\\Program Files\\Graphviz\\bin\\dot.exe
+Si se presenta fallos se podría cambiar de manera forzada la ruta para adaptarla a la pc donde se 
+ejecute el proyecto
+
+src -- > Proyecto 1 --> pkg1 -- > Funciones.java --> generarGrafoJpg() --> String dotPath = "//colocar la ruta acá//";
