@@ -9,30 +9,48 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Kevin
+ * Esta clase contiene los métodos y funciones para la ListaRestaurantes que
+ * servirá para el manejo de los datos referentes a los restaurantes
+ *
+ *
  */
 public class ListaRestaurantes {
 
+    //Campos de la clase
     private NodoRestaurante primero;
     private NodoRestaurante ultimo;
     private int tamano;
 
+    /**
+     *
+     * Constructor de ListaRestaurantes
+     *
+     */
     public ListaRestaurantes() {
         this.primero = null;
         this.ultimo = null;
         this.tamano = 0;
     }
 
-    public void vaciar() {
-        this.setPrimero(null);
-        this.setUltimo(null);
-        this.setTamano(0);
-    }
-
+    /**
+     *
+     * Método que devuelve si la lista es vacia o no
+     *
+     * @return true si está vacía, si no false
+     *
+     */
     public boolean esVacio() {
         return getPrimero() == null;
     }
 
+    /**
+     *
+     * Procedimiento para agregar elementos a lista
+     *
+     * @param direccion direccion del restaurante
+     * @param nombre nombre del restaurante
+     * @param menu menú con los platos del restaurante
+     */
     public void agregarFinal(char direccion, String nombre, String[] menu) {
         NodoRestaurante nuevo = new NodoRestaurante(direccion, nombre, menu);
         if (esVacio()) {
@@ -45,6 +63,15 @@ public class ListaRestaurantes {
         setTamano(getTamano() + 1);
     }
 
+    /**
+     *
+     * Método que te devuelve el la información del menú agrgandole la
+     * informacion del nodo
+     *
+     * @param nodo NodoRestaurante
+     * @return información del menú
+     *
+     */
     public String getMenu(NodoRestaurante nodo) {
         String info = "";
         for (int i = 0; i < nodo.getMenu().length; i++) {
@@ -57,6 +84,14 @@ public class ListaRestaurantes {
         return info;
     }
 
+    /**
+     *
+     * Método que te devuelve la información de los campos de la lista separados
+     * con coma
+     *
+     * @return informacion de los campos de la lista
+     *
+     */
     public String getInformacionLista() {
         String info = "Restaurantes\n";
         if (!esVacio()) {
@@ -71,6 +106,14 @@ public class ListaRestaurantes {
         return info;
     }
 
+    /**
+     *
+     * Método que te devuelve una lista con los nombres de los restaurantes de
+     * la lista
+     *
+     * @return lista con las nombres de los restaurantes
+     *
+     */
     public String[] getArrayRest() {
         String[] restaurantes = new String[getTamano()];
         NodoRestaurante aux = getPrimero();
@@ -81,6 +124,15 @@ public class ListaRestaurantes {
         return restaurantes;
     }
 
+    /**
+     *
+     * Método que te devuelve una lista con el menú del nombre del restaurante
+     * que se pase por parámetro
+     *
+     * @param restaurante nombre del restaurante que se quiere buscar el menú
+     * @return lista con el menú de un restaurante
+     *
+     */
     public String[] buscarRest(String restaurante) {
         NodoRestaurante aux = getPrimero();
         for (int i = 0; i < getTamano(); i++) {
@@ -114,6 +166,13 @@ public class ListaRestaurantes {
         return direcciones;
     }
 
+    /**
+     * Método que agrega un plato a un restaurante
+     *
+     * @param restaurante restaurante que se quiere agregar el plato
+     * @param plato plato a agregar
+     *
+     */
     public void setMenus(String restaurante, String agregado) {
         NodoRestaurante aux = getPrimero();
         String menuActual = "";
@@ -133,6 +192,13 @@ public class ListaRestaurantes {
         aux.setMenu(agregado.split("/"));
     }
 
+    /**
+     * Método que elimina un plato de un restaurante
+     *
+     * @param restaurante restaurante que se quiere eliminar el plato
+     * @param plato plato a eliminar
+     *
+     */
     public void EliminarPlato(String restaurante, String plato) {
         NodoRestaurante aux = getPrimero();
         String menuActual = "";
@@ -153,10 +219,18 @@ public class ListaRestaurantes {
 
     }
 
+    /**
+     * Método que devuelve un booleano dependiendo de si existe la direccion que
+     * se pase por parámetro
+     *
+     * @param direccion direccion del restaurante
+     *
+     * @return booleano
+     */
     public boolean existeDireccion(String direccion) {
         NodoRestaurante aux = getPrimero();
         for (int i = 0; i < getTamano(); i++) {
-            if (aux.getDireccion()== direccion.charAt(0)) {
+            if (aux.getDireccion() == direccion.charAt(0)) {
                 return true;
             }
             aux = aux.getSiguiente();
@@ -164,22 +238,7 @@ public class ListaRestaurantes {
         return false;
     }
 
-    public void imprimirLista() {
-        String info = "";
-        if (esVacio()) {
-            System.out.println("La lista está vacía");
-
-        } else {
-            NodoRestaurante aux = getPrimero();
-
-            for (int i = 0; i < getTamano(); i++) {
-                info += "Direccion: " + aux.getDireccion() + ", " + "Nombre: " + aux.getNombre() + "\n";
-                aux = aux.getSiguiente();
-            }
-        }
-        JOptionPane.showMessageDialog(null, info);
-    }
-
+    //Getters y setters
     public NodoRestaurante getPrimero() {
         return primero;
     }

@@ -7,24 +7,28 @@ package proyecto.pkg1;
 
 /**
  *
- * @author Kevin
+ * Clase que guarda todas las listas enlazadas donde está la información del programa
+ *
+
  */
 public class Listas {
 
+    //Campos de la clase
     private ListaRestaurantes listaRestaurantes;
     private ListaClientes listaClientes;
     private ListaPedidos listaPedidos;
     private ListaRutas listaRutas;
     private ListaDirecciones listaDirecciones;
 
-    public Listas(ListaRestaurantes listaRestaurantes, ListaClientes listaClientes, ListaPedidos listaPedidos, ListaRutas listaRutas){
+    public Listas(ListaRestaurantes listaRestaurantes, ListaClientes listaClientes, ListaPedidos listaPedidos, ListaRutas listaRutas) {
         this.listaRestaurantes = listaRestaurantes;
-        this.listaClientes =  listaClientes;
-        this.listaPedidos =  listaPedidos;
-        this.listaRutas =  listaRutas;
+        this.listaClientes = listaClientes;
+        this.listaPedidos = listaPedidos;
+        this.listaRutas = listaRutas;
         this.listaDirecciones = new ListaDirecciones();
-    } 
+    }
 
+    //Getters y setters
     public ListaRestaurantes getListaRestaurantes() {
         return listaRestaurantes;
     }
@@ -64,7 +68,5 @@ public class Listas {
     public void setListaDirecciones(ListaDirecciones listaDirecciones) {
         this.listaDirecciones = listaDirecciones;
     }
-    
-    
-    
+
 }

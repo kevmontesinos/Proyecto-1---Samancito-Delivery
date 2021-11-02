@@ -71,8 +71,9 @@ public class VentanaGeneral extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Bienvenido a Samancito Delivery");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 190, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 280, -1));
 
         cargarArchivo.setText("Cargar archivo ");
         cargarArchivo.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +165,6 @@ public class VentanaGeneral extends javax.swing.JFrame {
             for (int i = 0; i < direcciones.length; i++) {
                 listas.getListaDirecciones().agregarFinal(Character.toString(direcciones[i]));
             }
-            listas.getListaDirecciones().imprimirLista();
             archivo = true;
         } else {
             archivo = false;

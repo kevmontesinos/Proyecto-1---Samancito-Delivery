@@ -7,34 +7,61 @@ package proyecto.pkg1;
 
 /**
  *
- * @author Kevin
+ * Esta clase contiene los métodos y funciones para la ListaDirecciones que
+ * servirá para guardar todas las direcciones indiferentemente si sean de
+ * clientes o restaurantes. Utilizada frecuentemente para la elaboracion de las
+ * matrices de adyacencia
+ *
+ *
+ *
  */
 public class ListaDirecciones {
 
+    //Campos de la clase
     private NodoDireccion primero;
     private NodoDireccion ultimo;
     private int tamano;
 
+    /**
+     *
+     * Constructor de ListaClientes
+     *
+     */
     public ListaDirecciones() {
         this.primero = null;
         this.ultimo = null;
         this.tamano = 0;
     }
+    //Cierre del constructor
 
-    public void vaciar() {
-        this.setPrimero(null);
-        this.setUltimo(null);
-        this.setTamano(0);
-    }
-
+    /**
+     *
+     * Método que devuelve si la lista es vacia o no
+     *
+     * @return true si está vacía, si no false
+     *
+     */
     public boolean esVacio() {
         return getPrimero() == null;
     }
-    
-    public int getTamano(){
+
+    /**
+     *
+     * Método que devuelve el tamaño de la lista
+     *
+     * @return tamano, el numero de direcciones
+     *
+     */
+    public int getTamano() {
         return tamano;
     }
 
+    /**
+     *
+     * Procedimiento para agregar elementos a lista
+     *
+     * @param elemento direccion *
+     */
     public void agregarFinal(String elemento) {
         NodoDireccion nuevo = new NodoDireccion(elemento);
         if (esVacio()) {
@@ -47,6 +74,15 @@ public class ListaDirecciones {
         setTamano(getTamano() + 1);
     }
 
+    /**
+     *
+     * Método que te devuelve la posición de la direccion en la lista
+     *
+     * @param valor letra correspodiente a la direccion que se quiere hallar la
+     * posicion
+     * @return posición de la direccion en la lista
+     *
+     */
     public int getPosicionInt(String valor) {
         if (!esVacio()) {
             NodoDireccion aux = getPrimero();
@@ -66,6 +102,15 @@ public class ListaDirecciones {
         }
     }
 
+    /**
+     *
+     * Método que te devuelve la letra correspodiente a la dirección a partir de
+     * la posicion que se encuentre en la lista
+     *
+     * @param posicion posicion dentro de la lista 
+     * @return letra correspodiente a la posicion dentro de la lista
+     *
+     */
     public String getValor(int posicion) {
 
         if (!esVacio()) {
@@ -84,20 +129,7 @@ public class ListaDirecciones {
         return "";
     }
 
-    public void imprimirLista() {
-        if (esVacio()) {
-            System.out.println("La lista está vacía");
-
-        } else {
-            NodoDireccion aux = getPrimero();
-            for (int i = 0; i < getTamano(); i++) {
-                System.out.print(aux.getElemento() + " ");
-                aux = aux.getSiguiente();
-            }
-        }
-        System.out.println("");
-    }
-
+    //Getters y setters
     public NodoDireccion getPrimero() {
         return primero;
     }
@@ -119,5 +151,3 @@ public class ListaDirecciones {
     }
 
 }
-
-

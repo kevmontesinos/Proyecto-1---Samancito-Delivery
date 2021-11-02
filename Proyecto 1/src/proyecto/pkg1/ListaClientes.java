@@ -9,30 +9,50 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Kevin
+ * Esta clase contiene los métodos y funciones para la ListaClientes que servirá
+ * para el manejo de los datos referentes a los clientes
+ *
+ *
  */
 public class ListaClientes {
 
+    //Campos de la clase
     private NodoCliente primero;
     private NodoCliente ultimo;
     private int tamano;
 
+    /**
+     *
+     * Constructor de ListaClientes
+     *
+     */
     public ListaClientes() {
         this.primero = null;
         this.ultimo = null;
         this.tamano = 0;
     }
 
-    public void vaciar() {
-        this.setPrimero(null);
-        this.setUltimo(null);
-        this.setTamano(0);
-    }
-
+    //Cierre del constructor
+    /**
+     *
+     * Método que devuelve si la lista es vacia o no
+     *
+     * @return true si está vacía, si no false
+     *
+     */
     public boolean esVacio() {
         return getPrimero() == null;
     }
 
+    /**
+     *
+     * Procedimiento para agregar elementos a lista
+     *
+     * @param direccion direccion del cliente
+     * @param nombre nombre del cliente
+     * @param apellido apellido del cliente
+     * @param cedula cedula del cliente
+     */
     public void agregarFinal(char direccion, String nombre, String apellido, int cedula) {
         NodoCliente nuevo = new NodoCliente(direccion, nombre, apellido, cedula);
         if (esVacio()) {
@@ -45,6 +65,14 @@ public class ListaClientes {
         setTamano(getTamano() + 1);
     }
 
+    /**
+     *
+     * Método que te devuelve la información de los campos de la lista separados
+     * con coma
+     *
+     * @return informacion de los campos de la lista
+     *
+     */
     public String getInformacionLista() {
         String info = "Clientes\n";
         if (!esVacio()) {
@@ -59,6 +87,13 @@ public class ListaClientes {
         return info;
     }
 
+    /**
+     *
+     * Método que te devuelve una lista con las cedulas de los clientes
+     *
+     * @return lista con las cedulas de los clientes
+     *
+     */
     public int[] getArrayClientes() {
         int[] clientes = new int[getTamano()];
         NodoCliente aux = getPrimero();
@@ -69,6 +104,14 @@ public class ListaClientes {
         return clientes;
     }
 
+    /**
+     *
+     * Método que te devuelve el NodoCliente correspodiente a la cedula
+     *
+     * @param cedula cedula a buscar
+     * @return NodoCliente correspodiente a la cedula
+     *
+     */
     public NodoCliente getNodo(int cedula) {
         NodoCliente aux = getPrimero();
         for (int i = 0; i < getTamano(); i++) {
@@ -80,6 +123,12 @@ public class ListaClientes {
         return null;
     }
 
+    /**
+     * Método que devuelve una lista de caracteres con las direcciones de los
+     * clientes
+     *
+     * @return lista de caracteres con las direcciones de los clientes
+     */
     public char[] getDireccionesClientes() {
         char[] direcciones = new char[getTamano()];
         NodoCliente aux = getPrimero();
@@ -90,6 +139,14 @@ public class ListaClientes {
         return direcciones;
     }
 
+    /**
+     * Método que devuelve un booleano dependiendo de si existe la direccion que
+     * se pase por parámetro
+     *
+     * @param direccion direccion del cliente
+     *
+     * @return booleano 
+     */
     public boolean existeDireccion(String direccion) {
         NodoCliente aux = getPrimero();
         for (int i = 0; i < getTamano(); i++) {
@@ -100,23 +157,8 @@ public class ListaClientes {
         }
         return false;
     }
-
-    public void imprimirLista() {
-        String info = "";
-        if (esVacio()) {
-            System.out.println("La lista está vacía");
-
-        } else {
-            NodoCliente aux = getPrimero();
-
-            for (int i = 0; i < getTamano(); i++) {
-                info += "Direccion: " + aux.getDireccion() + ", " + "Nombre: " + aux.getNombre() + "\n";
-                aux = aux.getSiguiente();
-            }
-        }
-        JOptionPane.showMessageDialog(null, info);
-    }
-
+    
+    //Getters y setters
     public NodoCliente getPrimero() {
         return primero;
     }

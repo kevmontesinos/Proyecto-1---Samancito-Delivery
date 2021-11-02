@@ -7,23 +7,31 @@ package proyecto.pkg1;
 
 /**
  *
- * @author Kevin
+ * Esta clase es utilizada para crear el NodoRuta, usado posteriormente para la
+ * NodoRuta
+ *
  */
 public class NodoRuta {
-    
+
+    //Campos de la clase
     private NodoRuta siguiente;
     private char origen;
     private char destino;
     private int peso;
 
+    /**
+     *
+     * Constructor de NodoRuta
+     *
+     */
     public NodoRuta(char origen, char destino, int peso) {
         this.siguiente = null;
         this.origen = origen;
         this.destino = destino;
         this.peso = peso;
     }
-    
 
+    //Getters y setters
     public char getOrigen() {
         return origen;
     }
@@ -55,9 +63,5 @@ public class NodoRuta {
     public void setSiguiente(NodoRuta siguiente) {
         this.siguiente = siguiente;
     }
-    
-    
-
- 
 
 }

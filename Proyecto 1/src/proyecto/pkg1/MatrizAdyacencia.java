@@ -33,6 +33,14 @@ public class MatrizAdyacencia {
 
     }
 
+    /**
+     *
+     * Método la matriz de adyacencia sin los pesos correspondientes, utilizada
+     * posteriormente para el recorridos DFS
+     *
+     * @return matriz de adyacencia sin los pesos correspondientes
+     *
+     */
     public int[][] getMatrizSP() {
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz.length; j++) {
@@ -47,6 +55,13 @@ public class MatrizAdyacencia {
         return matriz;
     }
 
+    /**
+     *
+     * Método la matriz de adyacencia con los pesos correspondientes, utilizada para el algoritmo de Dijkstra
+     *
+     * @return matriz de adyacencia con los pesos correspondientes
+     *
+     */
     public int[][] getMatriz() {
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz.length; j++) {

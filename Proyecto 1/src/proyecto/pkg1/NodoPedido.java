@@ -7,20 +7,30 @@ package proyecto.pkg1;
 
 /**
  *
- * @author Kevin
+ * Esta clase es utilizada para crear el NodoPedido, usado posteriormente para
+ * la ListaPedido
+ *
  */
 public class NodoPedido {
+
+    //Campos de la clase
     private NodoPedido siguiente;
     private char direccionCliente;
     private char direccionRestaurante;
     private String pedido;
-      
-    public NodoPedido (char direccionCliente, char direccionRestaurante, String pedido){
+
+    /**
+     *
+     * Constructor de NodoCliente
+     *
+     */
+    public NodoPedido(char direccionCliente, char direccionRestaurante, String pedido) {
         this.direccionCliente = direccionCliente;
         this.direccionRestaurante = direccionRestaurante;
         this.pedido = pedido;
     }
-
+    
+    //Getter y setters
     public NodoPedido getSiguiente() {
         return siguiente;
     }
@@ -52,7 +62,5 @@ public class NodoPedido {
     public void setPedido(String pedido) {
         this.pedido = pedido;
     }
-    
-    
-    
+
 }

@@ -18,6 +18,10 @@ import javax.swing.JOptionPane;
  */
 public class Funciones {
 
+    /**
+     *
+     * Método lee el archivo local
+     */
     public Listas leerTxtPred() {
         ListaRestaurantes listaRestaurantes = new ListaRestaurantes();
         ListaClientes listaClientes = new ListaClientes();
@@ -95,6 +99,10 @@ public class Funciones {
         return new Listas(listaRestaurantes, listaClientes, listaPedidos, listaRutas);
     }
 
+    /**
+     *
+     * Método lee el archivo cargado desde otra carpeta
+     */
     public Listas leerTxtCargado() {
         ListaRestaurantes listaRestaurantes = new ListaRestaurantes();
         ListaClientes listaClientes = new ListaClientes();
@@ -171,6 +179,11 @@ public class Funciones {
 
     }
 
+    /**
+     *
+     * Método que reescribe el archivo txt a partir de los cambios hechos por el
+     * usuario
+     */
     public void escribirTxt(Listas listas) {
         ListaRestaurantes listaRestaurantes = listas.getListaRestaurantes();
         ListaClientes listaClientes = listas.getListaClientes();
@@ -212,6 +225,11 @@ public class Funciones {
         return direcciones;
     }
 
+    /**
+     *
+     * Genera el archivo txt en lenguaje de Graphviz para posteriormente generar
+     * la imagen del grafo
+     */
     public void generarArchivoGraphviz(Listas listas) {
 
         String info = "digraph G" + "\n"
@@ -238,6 +256,12 @@ public class Funciones {
         }
     }
 
+    /**
+     *
+     * Genera la imagen del grafo 
+     * @param listas listas con todos los datos
+     */
+
     public void generarGrafoJpg(Listas listas) {
         try {
             this.generarArchivoGraphviz(listas);
@@ -255,7 +279,7 @@ public class Funciones {
             String tOParam = "-o";
 
             //concatenamos nuestras direcciones. Lo que hice es crear un vector, para poder editar las direcciones de entrada y salida, usando las variables antes inicializadas
-            //recordemos el comando en la consola de windows: C:\Archivos de programa\Graphviz 2.21\bin\dot.exe -Tjpg grafo1.txt -o grafo1.jpg Esto es lo que concatenamos en el vector siguiente:
+            //recordemos el comando en la consola de windows: C:\Archivos de programa\Graphviz\bin\dot.exe -Tjpg grafo1.txt -o grafo1.jpg Esto es lo que concatenamos en el vector siguiente:
             String[] cmd = new String[5];
             cmd[0] = dotPath;
             cmd[1] = tParam;
@@ -299,7 +323,5 @@ public class Funciones {
         }
 
     }
-    
-    
 
 }

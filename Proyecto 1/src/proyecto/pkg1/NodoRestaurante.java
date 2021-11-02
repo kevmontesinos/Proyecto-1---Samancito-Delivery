@@ -7,23 +7,32 @@ package proyecto.pkg1;
 
 /**
  *
- * @author Kevin
+ * Esta clase es utilizada para crear el NodoRestaurante, usado posteriormente
+ * para la ListaRestaurante
+ *
  */
 public class NodoRestaurante {
-    
+
+    //Campos de la clase
     private NodoRestaurante siguiente;
     private char direccion;
     private String nombre;
     private String[] menu;
-    
-    public NodoRestaurante(char direccion, String nombre, String[] menu){
+
+    /**
+     *
+     * Constructor de NodoRestaurante
+     *
+     */
+    public NodoRestaurante(char direccion, String nombre, String[] menu) {
         this.direccion = direccion;
         this.nombre = nombre;
         this.menu = menu;
         this.siguiente = null;
-        
+
     }
 
+    //Getter y setters    
     public NodoRestaurante getSiguiente() {
         return siguiente;
     }
@@ -55,5 +64,5 @@ public class NodoRestaurante {
     public void setMenu(String[] menu) {
         this.menu = menu;
     }
-    
+
 }

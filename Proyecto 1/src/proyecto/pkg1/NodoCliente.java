@@ -7,25 +7,34 @@ package proyecto.pkg1;
 
 /**
  *
- * @author Kevin
+ * Esta clase es utilizada para crear el NodoCliente, usado posteriormente para
+ * la ListaCliente
+ *
  */
 public class NodoCliente {
+
+    //Campos de la clase
     private NodoCliente siguiente;
     private char direccion;
     private String nombre;
     private String apellido;
     private int cedula;
-    
-    public NodoCliente(char direccion, String nombre, String apellido, int cedula){
+
+    /**
+     *
+     * Constructor de NodoCliente
+     *
+     */
+    public NodoCliente(char direccion, String nombre, String apellido, int cedula) {
         this.direccion = direccion;
         this.nombre = nombre;
         this.apellido = apellido;
         this.cedula = cedula;
         this.siguiente = null;
-        
-        
+
     }
-    
+
+    //Getters y setters
     public NodoCliente getSiguiente() {
         return siguiente;
     }
@@ -65,5 +74,5 @@ public class NodoCliente {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-    
+
 }
